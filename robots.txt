@@ -13,4 +13,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://choikiho20-cyber.github.io/21c-donggang-rafting/sitemap.xml
+Sitemap: https://donggang21c.com/sitemap.xml
