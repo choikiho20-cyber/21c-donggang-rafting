@@ -6,6 +6,7 @@
     <meta name="robots" content="noindex, nofollow">
     <title>블로그 관리 | 21세기동강래프팅</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
     <style>
         :root { --navy: #0a1d3f; --blue: #0066cc; --green: #00c853; --red: #ff0033; --yellow: #ffd700; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -15,7 +16,7 @@
         .admin-header h1 { font-size: 18px; }
         .admin-header a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px; }
 
-        .container { max-width: 900px; margin: 24px auto; padding: 0 20px; }
+        .container { max-width: 960px; margin: 24px auto; padding: 0 20px; }
 
         .login-box { background: white; border-radius: 12px; padding: 40px; max-width: 400px; margin: 80px auto; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
         .login-box h2 { margin-bottom: 20px; color: var(--navy); }
@@ -26,7 +27,7 @@
         .setup-box h3 { color: #856404; margin-bottom: 8px; font-size: 15px; }
         .setup-box p { font-size: 13px; color: #856404; margin-bottom: 12px; line-height: 1.6; }
         .setup-box input { width: 100%; padding: 10px; border: 2px solid #ffc107; border-radius: 8px; font-size: 14px; }
-        .setup-box button { margin-top: 8px; padding: 8px 20px; background: #856404; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 700; }
+        .setup-box .btn-save-token { margin-top: 8px; padding: 8px 20px; background: #856404; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 700; }
         .setup-ok { background: #d4edda; border-color: #28a745; }
         .setup-ok h3, .setup-ok p { color: #155724; }
 
@@ -42,9 +43,10 @@
 
         .post-list { display: flex; flex-direction: column; gap: 12px; }
         .post-item { background: white; border-radius: 8px; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 6px rgba(0,0,0,0.06); }
-        .post-item-info h3 { font-size: 15px; color: var(--navy); margin-bottom: 4px; }
+        .post-item-info { flex: 1; min-width: 0; }
+        .post-item-info h3 { font-size: 15px; color: var(--navy); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .post-item-info span { font-size: 12px; color: #999; }
-        .post-item-actions { display: flex; gap: 8px; }
+        .post-item-actions { display: flex; gap: 8px; flex-shrink: 0; }
         .post-item-actions button { padding: 6px 14px; font-size: 12px; }
 
         .editor { display: none; background: white; border-radius: 12px; padding: 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
@@ -52,10 +54,15 @@
         .editor h2 { color: var(--navy); margin-bottom: 20px; }
         .form-group { margin-bottom: 16px; }
         .form-group label { display: block; font-size: 13px; font-weight: 700; color: #555; margin-bottom: 6px; }
-        .form-group input, .form-group textarea { width: 100%; padding: 10px 14px; border: 2px solid #ddd; border-radius: 8px; font-size: 14px; font-family: inherit; }
-        .form-group input:focus, .form-group textarea:focus { border-color: var(--blue); outline: none; }
-        .form-group textarea { min-height: 300px; line-height: 1.6; }
+        .form-group input { width: 100%; padding: 10px 14px; border: 2px solid #ddd; border-radius: 8px; font-size: 14px; font-family: inherit; }
+        .form-group input:focus { border-color: var(--blue); outline: none; }
         .form-actions { display: flex; gap: 10px; margin-top: 20px; }
+
+        #quillEditor { height: 400px; font-size: 16px; line-height: 1.8; }
+        .ql-toolbar.ql-snow { border-radius: 8px 8px 0 0; border-color: #ddd; background: #fafafa; }
+        .ql-container.ql-snow { border-radius: 0 0 8px 8px; border-color: #ddd; }
+        .ql-editor { min-height: 350px; }
+        .ql-editor img { max-width: 100%; height: auto; border-radius: 8px; margin: 8px 0; }
 
         .status { padding: 12px 20px; border-radius: 8px; margin-bottom: 16px; font-size: 14px; display: none; }
         .status.show { display: block; }
@@ -63,11 +70,18 @@
         .status.error { background: #f8d7da; color: #721c24; }
         .status.loading { background: #cce5ff; color: #004085; }
 
-        .help-text { font-size: 12px; color: #999; margin-top: 4px; }
+        .img-upload-area { border: 2px dashed #ccc; border-radius: 8px; padding: 16px; text-align: center; margin-bottom: 16px; background: #fafafa; }
+        .img-upload-area p { font-size: 13px; color: #999; margin-bottom: 8px; }
+        .img-upload-area input[type="file"] { font-size: 13px; }
+        .img-upload-area .uploading { color: var(--blue); font-weight: 700; }
+        .img-preview { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+        .img-preview img { width: 80px; height: 80px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 2px solid #ddd; }
+        .img-preview img:hover { border-color: var(--blue); }
 
         @media (max-width: 768px) {
             .post-item { flex-direction: column; align-items: flex-start; gap: 10px; }
             .form-actions { flex-direction: column; }
+            #quillEditor { height: 300px; }
         }
     </style>
 </head>
@@ -98,7 +112,7 @@
             GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token<br>
             권한: <strong>repo</strong>에 체크 → 생성된 토큰을 아래에 붙여넣기</p>
             <input type="text" id="tokenInput" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
-            <button onclick="saveToken()">토큰 저장</button>
+            <button class="btn-save-token" onclick="saveToken()">토큰 저장</button>
         </div>
 
         <div id="mainView">
@@ -116,22 +130,29 @@
                 <input type="text" id="inputTitle" placeholder="글 제목을 입력하세요">
             </div>
             <div class="form-group">
-                <label>요약 (목록에 보이는 설명)</label>
+                <label>요약 (목록에 보이는 한줄 설명)</label>
                 <input type="text" id="inputSummary" placeholder="한두 줄로 요약">
             </div>
             <div class="form-group">
                 <label>태그 (쉼표로 구분)</label>
                 <input type="text" id="inputTags" placeholder="동강래프팅, 가족여행, 준비물">
             </div>
+
             <div class="form-group">
-                <label>본문 (HTML)</label>
-                <textarea id="inputContent" placeholder="<h2>소제목</h2>
-<p>본문 내용을 작성하세요.</p>
-<ul>
-<li>목록 항목</li>
-</ul>"></textarea>
-                <div class="help-text">HTML 태그 사용: &lt;h2&gt;소제목&lt;/h2&gt; &lt;p&gt;문단&lt;/p&gt; &lt;ul&gt;&lt;li&gt;목록&lt;/li&gt;&lt;/ul&gt; &lt;strong&gt;굵게&lt;/strong&gt; &lt;table&gt;표&lt;/table&gt;</div>
+                <label>📷 사진 첨부 (사진을 업로드하면 본문에 삽입됩니다)</label>
+                <div class="img-upload-area">
+                    <p>사진 파일을 선택하세요 (JPG, PNG, WebP)</p>
+                    <input type="file" id="imgFileInput" accept="image/*" multiple onchange="uploadImages(this.files)">
+                    <div id="imgUploadStatus"></div>
+                    <div id="imgPreview" class="img-preview"></div>
+                </div>
             </div>
+
+            <div class="form-group">
+                <label>본문</label>
+                <div id="quillEditor"></div>
+            </div>
+
             <div class="form-group">
                 <label>날짜</label>
                 <input type="date" id="inputDate">
@@ -144,6 +165,7 @@
     </div>
 </div>
 
+<script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
 <script>
 const REPO_OWNER = 'choikiho20-cyber';
 const REPO_NAME = '21c-donggang-rafting';
@@ -152,12 +174,37 @@ const PASSWORD = '2021';
 
 let posts = [];
 let editingId = null;
-let fileSha = null;
+let quill = null;
+
+function initQuill() {
+    if (quill) return;
+    quill = new Quill('#quillEditor', {
+        theme: 'snow',
+        placeholder: '여기에 글을 작성하세요...\n\n네이버 블로그처럼 글을 쓰고, 사진을 넣고, 링크를 걸 수 있습니다.',
+        modules: {
+            toolbar: [
+                [{ 'header': [1, 2, 3, false] }],
+                ['bold', 'italic', 'underline', 'strike'],
+                [{ 'color': [] }, { 'background': [] }],
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                [{ 'align': [] }],
+                ['link', 'image'],
+                ['blockquote'],
+                ['clean']
+            ]
+        }
+    });
+
+    quill.getModule('toolbar').addHandler('image', function() {
+        document.getElementById('imgFileInput').click();
+    });
+}
 
 function doLogin() {
     if (document.getElementById('pwInput').value === PASSWORD) {
         document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('adminApp').style.display = 'block';
+        initQuill();
         checkToken();
         loadPosts();
     } else {
@@ -184,7 +231,7 @@ function saveToken() {
 function resetToken() {
     localStorage.removeItem('gh_token');
     document.getElementById('tokenSetup').className = 'setup-box';
-    document.getElementById('tokenSetup').innerHTML = '<h3>⚙️ GitHub 토큰 재설정</h3><p>새 토큰을 입력해주세요.</p><input type="text" id="tokenInput" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"><button onclick="saveToken()">토큰 저장</button>';
+    document.getElementById('tokenSetup').innerHTML = `<h3>⚙️ GitHub 토큰 재설정</h3><p>새 토큰을 입력해주세요.</p><input type="text" id="tokenInput" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"><button class="btn-save-token" onclick="saveToken()">토큰 저장</button>`;
 }
 
 function showStatus(msg, type) {
@@ -232,11 +279,21 @@ function showEditor(post) {
     document.getElementById('inputTitle').value = post ? post.title : '';
     document.getElementById('inputSummary').value = post ? post.summary : '';
     document.getElementById('inputTags').value = post ? post.tags.join(', ') : '';
-    document.getElementById('inputContent').value = post ? post.content : '';
     document.getElementById('inputDate').value = post ? post.date : new Date().toISOString().split('T')[0];
+
+    if (post && post.content) {
+        quill.root.innerHTML = post.content;
+    } else {
+        quill.setContents([]);
+    }
+
+    document.getElementById('imgPreview').innerHTML = '';
+    document.getElementById('imgUploadStatus').innerHTML = '';
+    document.getElementById('imgFileInput').value = '';
 
     document.getElementById('mainView').style.display = 'none';
     document.getElementById('editorView').classList.add('active');
+    window.scrollTo(0, 0);
 }
 
 function cancelEdit() {
@@ -253,19 +310,88 @@ function editPost(id) {
 async function deletePost(id) {
     const post = posts.find(p => p.id === id);
     if (!confirm(`"${post.title}" 글을 삭제하시겠습니까?`)) return;
-
     posts = posts.filter(p => p.id !== id);
     await commitPosts('글 삭제: ' + post.title);
+}
+
+async function uploadImages(files) {
+    const token = localStorage.getItem('gh_token');
+    if (!token) { alert('GitHub 토큰을 먼저 설정해주세요.'); return; }
+
+    const statusEl = document.getElementById('imgUploadStatus');
+    const previewEl = document.getElementById('imgPreview');
+
+    for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        if (!file.type.startsWith('image/')) continue;
+
+        statusEl.innerHTML = `<span class="uploading">📤 업로드 중... (${i + 1}/${files.length})</span>`;
+
+        try {
+            const base64 = await fileToBase64(file);
+            const timestamp = Date.now();
+            const ext = file.name.split('.').pop().toLowerCase();
+            const fileName = `blog-${timestamp}-${i}.${ext}`;
+            const filePath = `images/${fileName}`;
+
+            const putRes = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${filePath}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': 'token ' + token,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    message: '블로그 이미지: ' + fileName,
+                    content: base64
+                })
+            });
+
+            if (putRes.ok) {
+                const imgUrl = `https://donggang21c.com/${filePath}`;
+                const range = quill.getSelection(true);
+                quill.insertEmbed(range ? range.index : quill.getLength(), 'image', imgUrl);
+                quill.insertText((range ? range.index : quill.getLength()) + 1, '\n');
+
+                const thumb = document.createElement('img');
+                thumb.src = URL.createObjectURL(file);
+                thumb.title = '클릭하면 본문에 다시 삽입';
+                thumb.onclick = function() {
+                    const r = quill.getSelection(true);
+                    quill.insertEmbed(r ? r.index : quill.getLength(), 'image', imgUrl);
+                };
+                previewEl.appendChild(thumb);
+            } else {
+                const err = await putRes.json();
+                statusEl.innerHTML = `<span style="color:red;">업로드 실패: ${err.message}</span>`;
+                return;
+            }
+        } catch (e) {
+            statusEl.innerHTML = `<span style="color:red;">오류: ${e.message}</span>`;
+            return;
+        }
+    }
+    statusEl.innerHTML = '<span style="color:green;">✅ 업로드 완료! 본문에 삽입되었습니다.</span>';
+    document.getElementById('imgFileInput').value = '';
+}
+
+function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result.split(',')[1]);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
 }
 
 async function savePost() {
     const title = document.getElementById('inputTitle').value.trim();
     const summary = document.getElementById('inputSummary').value.trim();
     const tags = document.getElementById('inputTags').value.split(',').map(t => t.trim()).filter(t => t);
-    const content = document.getElementById('inputContent').value.trim();
+    const content = quill.root.innerHTML.trim();
     const date = document.getElementById('inputDate').value;
 
-    if (!title || !content) { alert('제목과 본문을 입력해주세요.'); return; }
+    if (!title) { alert('제목을 입력해주세요.'); return; }
+    if (!content || content === '<p><br></p>') { alert('본문을 입력해주세요.'); return; }
 
     if (editingId) {
         const idx = posts.findIndex(p => p.id === editingId);
@@ -291,7 +417,6 @@ async function commitPosts(message) {
             headers: { 'Authorization': 'token ' + token }
         });
         const getData = await getRes.json();
-        fileSha = getData.sha;
 
         const sorted = [...posts].sort((a, b) => new Date(b.date) - new Date(a.date));
         const jsonStr = JSON.stringify(sorted, null, 2);
@@ -306,12 +431,12 @@ async function commitPosts(message) {
             body: JSON.stringify({
                 message: message,
                 content: encoded,
-                sha: fileSha
+                sha: getData.sha
             })
         });
 
         if (putRes.ok) {
-            showStatus('저장 완료! 1~2분 후 블로그에 반영됩니다.', 'success');
+            showStatus('✅ 저장 완료! 1~2분 후 블로그에 반영됩니다.', 'success');
             posts = sorted;
             renderPostList();
             cancelEdit();
