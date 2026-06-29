@@ -1,0 +1,52 @@
+[
+  {
+    "src": "images/hero-rafting.jpeg",
+    "caption": "🚣 신나는 동강 래프팅!",
+    "wide": true
+  },
+  {
+    "src": "images/rafting-scenic.jpg",
+    "caption": "💧 짜릿한 급류 체험",
+    "wide": false
+  },
+  {
+    "src": "images/group-photo.jpeg",
+    "caption": "👥 출발 전 단체 사진",
+    "wide": false
+  },
+  {
+    "src": "images/promo-onestop.png",
+    "caption": "🏠 원스톱 서비스 시설",
+    "wide": false
+  },
+  {
+    "src": "images/promo-family.png",
+    "caption": "👨‍👩‍👧‍👦 아이와 함께 가족여행",
+    "wide": false
+  },
+  {
+    "src": "images/promo-recommend.png",
+    "caption": "⭐ 1박2일 추천 코스",
+    "wide": true
+  },
+  {
+    "src": "images/promo-main.png",
+    "caption": "🥩 래프팅 + 삼겹살 무한리필!",
+    "wide": true
+  },
+  {
+    "src": "images/rafting-action.jpg",
+    "caption": "🌊 동강의 아름다운 절경",
+    "wide": false
+  },
+  {
+    "src": "images/promo-action.png",
+    "caption": "🔥 영월 NO.1 래프팅",
+    "wide": false
+  },
+  {
+    "src": "gallery/photo_1782771576170_0.jpg",
+    "caption": "",
+    "wide": false
+  }
+]
