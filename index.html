@@ -1202,27 +1202,39 @@ function deletePhoto(index) {
     renderGallery();
 }
 
-document.getElementById('galFileInput').addEventListener('change', function(e) {
-    const files = Array.from(e.target.files);
-    let loaded = 0;
-    files.forEach(file => {
+function compressImage(file, maxWidth, quality) {
+    return new Promise(resolve => {
         const reader = new FileReader();
         reader.onload = function(ev) {
-            const caption = prompt('사진 설명을 입력하세요 (선택사항):', '') || '';
-            galleryPhotos.push({ src: ev.target.result, caption: caption, wide: false });
-            loaded++;
-            if (loaded === files.length) {
-                try {
-                    localStorage.setItem('galleryPhotos', JSON.stringify(galleryPhotos));
-                } catch(err) {
-                    alert('저장 용량을 초과했습니다. 이미지 크기를 줄이거나 일부 사진을 삭제해주세요.');
-                    galleryPhotos.splice(galleryPhotos.length - files.length, files.length);
-                }
-                renderGallery();
-            }
+            const img = new Image();
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                let w = img.width, h = img.height;
+                if (w > maxWidth) { h = Math.round(h * maxWidth / w); w = maxWidth; }
+                canvas.width = w; canvas.height = h;
+                canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+                resolve(canvas.toDataURL('image/jpeg', quality));
+            };
+            img.src = ev.target.result;
         };
         reader.readAsDataURL(file);
     });
+}
+
+document.getElementById('galFileInput').addEventListener('change', async function(e) {
+    const files = Array.from(e.target.files);
+    for (const file of files) {
+        const compressed = await compressImage(file, 1200, 0.6);
+        const caption = prompt('사진 설명을 입력하세요 (선택사항):', '') || '';
+        galleryPhotos.push({ src: compressed, caption: caption, wide: false });
+    }
+    try {
+        localStorage.setItem('galleryPhotos', JSON.stringify(galleryPhotos));
+    } catch(err) {
+        alert('저장 용량을 초과했습니다. 일부 사진을 삭제 후 다시 시도해주세요.');
+        galleryPhotos.splice(galleryPhotos.length - files.length, files.length);
+    }
+    renderGallery();
     e.target.value = '';
 });
 
