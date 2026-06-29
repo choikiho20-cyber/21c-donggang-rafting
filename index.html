@@ -1236,7 +1236,17 @@ document.getElementById('galFileInput').addEventListener('change', async functio
     }
     try {
         localStorage.setItem('galleryPhotos', JSON.stringify(galleryPhotos));
-        status.innerHTML = `✅ ${added}장 업로드 완료!`;
+        status.remove();
+        renderGallery();
+        if (confirm(`✅ ${added}장 업로드 완료!\n\n사진 설명을 추가하시겠습니까?`)) {
+            for (let j = galleryPhotos.length - added; j < galleryPhotos.length; j++) {
+                const cap = prompt(`사진 ${j - (galleryPhotos.length - added) + 1}/${added} 설명 (건너뛰려면 빈칸):`, '') || '';
+                if (cap) { galleryPhotos[j].caption = cap; }
+            }
+            localStorage.setItem('galleryPhotos', JSON.stringify(galleryPhotos));
+            renderGallery();
+        }
+        return;
     } catch(err) {
         status.innerHTML = `⚠️ 용량 초과! 일부 사진을 삭제 후 다시 시도해주세요.`;
         galleryPhotos.splice(galleryPhotos.length - added, added);
