@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>블로그 관리 | 21세기동강래프팅</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root { --navy: #0a1d3f; --blue: #0066cc; --green: #00c853; --red: #ff0033; --yellow: #ffd700; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Noto Sans KR', sans-serif; background: #f0f4f8; color: #222; }
+
+        .admin-header { background: var(--navy); color: white; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; }
+        .admin-header h1 { font-size: 18px; }
+        .admin-header a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px; }
+
+        .container { max-width: 900px; margin: 24px auto; padding: 0 20px; }
+
+        .login-box { background: white; border-radius: 12px; padding: 40px; max-width: 400px; margin: 80px auto; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .login-box h2 { margin-bottom: 20px; color: var(--navy); }
+        .login-box input { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; text-align: center; margin-bottom: 12px; }
+        .login-box button { width: 100%; padding: 12px; background: var(--blue); color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; }
+
+        .setup-box { background: #fff3cd; border: 2px solid #ffc107; border-radius: 12px; padding: 20px; margin-bottom: 24px; }
+        .setup-box h3 { color: #856404; margin-bottom: 8px; font-size: 15px; }
+        .setup-box p { font-size: 13px; color: #856404; margin-bottom: 12px; line-height: 1.6; }
+        .setup-box input { width: 100%; padding: 10px; border: 2px solid #ffc107; border-radius: 8px; font-size: 14px; }
+        .setup-box button { margin-top: 8px; padding: 8px 20px; background: #856404; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 700; }
+        .setup-ok { background: #d4edda; border-color: #28a745; }
+        .setup-ok h3, .setup-ok p { color: #155724; }
+
+        .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .toolbar h2 { font-size: 20px; color: var(--navy); }
+        .btn { padding: 10px 20px; border: none; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+        .btn-blue { background: var(--blue); color: white; }
+        .btn-blue:hover { background: var(--navy); }
+        .btn-green { background: var(--green); color: white; }
+        .btn-red { background: var(--red); color: white; }
+        .btn-gray { background: #ddd; color: #333; }
+        .btn:hover { transform: translateY(-1px); }
+
+        .post-list { display: flex; flex-direction: column; gap: 12px; }
+        .post-item { background: white; border-radius: 8px; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 6px rgba(0,0,0,0.06); }
+        .post-item-info h3 { font-size: 15px; color: var(--navy); margin-bottom: 4px; }
+        .post-item-info span { font-size: 12px; color: #999; }
+        .post-item-actions { display: flex; gap: 8px; }
+        .post-item-actions button { padding: 6px 14px; font-size: 12px; }
+
+        .editor { display: none; background: white; border-radius: 12px; padding: 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .editor.active { display: block; }
+        .editor h2 { color: var(--navy); margin-bottom: 20px; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-size: 13px; font-weight: 700; color: #555; margin-bottom: 6px; }
+        .form-group input, .form-group textarea { width: 100%; padding: 10px 14px; border: 2px solid #ddd; border-radius: 8px; font-size: 14px; font-family: inherit; }
+        .form-group input:focus, .form-group textarea:focus { border-color: var(--blue); outline: none; }
+        .form-group textarea { min-height: 300px; line-height: 1.6; }
+        .form-actions { display: flex; gap: 10px; margin-top: 20px; }
+
+        .status { padding: 12px 20px; border-radius: 8px; margin-bottom: 16px; font-size: 14px; display: none; }
+        .status.show { display: block; }
+        .status.success { background: #d4edda; color: #155724; }
+        .status.error { background: #f8d7da; color: #721c24; }
+        .status.loading { background: #cce5ff; color: #004085; }
+
+        .help-text { font-size: 12px; color: #999; margin-top: 4px; }
+
+        @media (max-width: 768px) {
+            .post-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .form-actions { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="loginScreen" class="login-box">
+    <h2>🔒 블로그 관리</h2>
+    <input type="password" id="pwInput" placeholder="비밀번호 입력" onkeydown="if(event.key==='Enter')doLogin()">
+    <button onclick="doLogin()">로그인</button>
+</div>
+
+<div id="adminApp" style="display:none;">
+    <div class="admin-header">
+        <h1>📝 블로그 관리</h1>
+        <div>
+            <a href="blog.html" target="_blank">블로그 보기 ↗</a>
+            &nbsp;&nbsp;
+            <a href="index.html">홈으로</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="statusMsg" class="status"></div>
+
+        <div id="tokenSetup" class="setup-box">
+            <h3>⚙️ 최초 1회 설정 — GitHub 토큰</h3>
+            <p>글을 발행하려면 GitHub Personal Access Token이 필요합니다.<br>
+            GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token<br>
+            권한: <strong>repo</strong>에 체크 → 생성된 토큰을 아래에 붙여넣기</p>
+            <input type="text" id="tokenInput" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+            <button onclick="saveToken()">토큰 저장</button>
+        </div>
+
+        <div id="mainView">
+            <div class="toolbar">
+                <h2>글 목록</h2>
+                <button class="btn btn-blue" onclick="showEditor()">+ 새 글 쓰기</button>
+            </div>
+            <div id="postList" class="post-list"></div>
+        </div>
+
+        <div id="editorView" class="editor">
+            <h2 id="editorTitle">새 글 쓰기</h2>
+            <div class="form-group">
+                <label>제목</label>
+                <input type="text" id="inputTitle" placeholder="글 제목을 입력하세요">
+            </div>
+            <div class="form-group">
+                <label>요약 (목록에 보이는 설명)</label>
+                <input type="text" id="inputSummary" placeholder="한두 줄로 요약">
+            </div>
+            <div class="form-group">
+                <label>태그 (쉼표로 구분)</label>
+                <input type="text" id="inputTags" placeholder="동강래프팅, 가족여행, 준비물">
+            </div>
+            <div class="form-group">
+                <label>본문 (HTML)</label>
+                <textarea id="inputContent" placeholder="<h2>소제목</h2>
+<p>본문 내용을 작성하세요.</p>
+<ul>
+<li>목록 항목</li>
+</ul>"></textarea>
+                <div class="help-text">HTML 태그 사용: &lt;h2&gt;소제목&lt;/h2&gt; &lt;p&gt;문단&lt;/p&gt; &lt;ul&gt;&lt;li&gt;목록&lt;/li&gt;&lt;/ul&gt; &lt;strong&gt;굵게&lt;/strong&gt; &lt;table&gt;표&lt;/table&gt;</div>
+            </div>
+            <div class="form-group">
+                <label>날짜</label>
+                <input type="date" id="inputDate">
+            </div>
+            <div class="form-actions">
+                <button class="btn btn-green" onclick="savePost()">💾 발행하기</button>
+                <button class="btn btn-gray" onclick="cancelEdit()">취소</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const REPO_OWNER = 'choikiho20-cyber';
+const REPO_NAME = '21c-donggang-rafting';
+const FILE_PATH = 'posts.json';
+const PASSWORD = '2021';
+
+let posts = [];
+let editingId = null;
+let fileSha = null;
+
+function doLogin() {
+    if (document.getElementById('pwInput').value === PASSWORD) {
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('adminApp').style.display = 'block';
+        checkToken();
+        loadPosts();
+    } else {
+        alert('비밀번호가 틀렸습니다.');
+    }
+}
+
+function checkToken() {
+    const token = localStorage.getItem('gh_token');
+    if (token) {
+        document.getElementById('tokenSetup').className = 'setup-box setup-ok';
+        document.getElementById('tokenSetup').innerHTML = '<h3>✅ GitHub 연결됨</h3><p>토큰이 설정되어 있습니다. <button onclick="resetToken()" style="background:none;border:1px solid #155724;color:#155724;padding:4px 10px;border-radius:4px;cursor:pointer;font-size:12px;">토큰 변경</button></p>';
+    }
+}
+
+function saveToken() {
+    const token = document.getElementById('tokenInput').value.trim();
+    if (!token) { alert('토큰을 입력해주세요.'); return; }
+    localStorage.setItem('gh_token', token);
+    checkToken();
+    showStatus('토큰이 저장되었습니다.', 'success');
+}
+
+function resetToken() {
+    localStorage.removeItem('gh_token');
+    document.getElementById('tokenSetup').className = 'setup-box';
+    document.getElementById('tokenSetup').innerHTML = '<h3>⚙️ GitHub 토큰 재설정</h3><p>새 토큰을 입력해주세요.</p><input type="text" id="tokenInput" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"><button onclick="saveToken()">토큰 저장</button>';
+}
+
+function showStatus(msg, type) {
+    const el = document.getElementById('statusMsg');
+    el.textContent = msg;
+    el.className = 'status show ' + type;
+    if (type !== 'loading') setTimeout(() => el.className = 'status', 4000);
+}
+
+async function loadPosts() {
+    try {
+        const res = await fetch('posts.json?' + Date.now());
+        posts = await res.json();
+        posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+        renderPostList();
+    } catch (e) {
+        posts = [];
+        renderPostList();
+    }
+}
+
+function renderPostList() {
+    const list = document.getElementById('postList');
+    if (posts.length === 0) {
+        list.innerHTML = '<p style="text-align:center;padding:40px;color:#999;">아직 글이 없습니다. 새 글을 작성해보세요!</p>';
+        return;
+    }
+    list.innerHTML = posts.map(p => `
+        <div class="post-item">
+            <div class="post-item-info">
+                <h3>${p.title}</h3>
+                <span>${p.date} · ${p.tags.map(t => '#' + t).join(' ')}</span>
+            </div>
+            <div class="post-item-actions">
+                <button class="btn btn-blue" onclick="editPost(${p.id})">수정</button>
+                <button class="btn btn-red" onclick="deletePost(${p.id})">삭제</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+function showEditor(post) {
+    editingId = post ? post.id : null;
+    document.getElementById('editorTitle').textContent = post ? '글 수정' : '새 글 쓰기';
+    document.getElementById('inputTitle').value = post ? post.title : '';
+    document.getElementById('inputSummary').value = post ? post.summary : '';
+    document.getElementById('inputTags').value = post ? post.tags.join(', ') : '';
+    document.getElementById('inputContent').value = post ? post.content : '';
+    document.getElementById('inputDate').value = post ? post.date : new Date().toISOString().split('T')[0];
+
+    document.getElementById('mainView').style.display = 'none';
+    document.getElementById('editorView').classList.add('active');
+}
+
+function cancelEdit() {
+    document.getElementById('mainView').style.display = 'block';
+    document.getElementById('editorView').classList.remove('active');
+    editingId = null;
+}
+
+function editPost(id) {
+    const post = posts.find(p => p.id === id);
+    if (post) showEditor(post);
+}
+
+async function deletePost(id) {
+    const post = posts.find(p => p.id === id);
+    if (!confirm(`"${post.title}" 글을 삭제하시겠습니까?`)) return;
+
+    posts = posts.filter(p => p.id !== id);
+    await commitPosts('글 삭제: ' + post.title);
+}
+
+async function savePost() {
+    const title = document.getElementById('inputTitle').value.trim();
+    const summary = document.getElementById('inputSummary').value.trim();
+    const tags = document.getElementById('inputTags').value.split(',').map(t => t.trim()).filter(t => t);
+    const content = document.getElementById('inputContent').value.trim();
+    const date = document.getElementById('inputDate').value;
+
+    if (!title || !content) { alert('제목과 본문을 입력해주세요.'); return; }
+
+    if (editingId) {
+        const idx = posts.findIndex(p => p.id === editingId);
+        if (idx !== -1) {
+            posts[idx] = { ...posts[idx], title, summary, tags, content, date };
+        }
+        await commitPosts('글 수정: ' + title);
+    } else {
+        const maxId = posts.length > 0 ? Math.max(...posts.map(p => p.id)) : 0;
+        posts.push({ id: maxId + 1, title, date, tags, summary, content });
+        await commitPosts('새 글: ' + title);
+    }
+}
+
+async function commitPosts(message) {
+    const token = localStorage.getItem('gh_token');
+    if (!token) { alert('GitHub 토큰을 먼저 설정해주세요.'); return; }
+
+    showStatus('GitHub에 저장 중...', 'loading');
+
+    try {
+        const getRes = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`, {
+            headers: { 'Authorization': 'token ' + token }
+        });
+        const getData = await getRes.json();
+        fileSha = getData.sha;
+
+        const sorted = [...posts].sort((a, b) => new Date(b.date) - new Date(a.date));
+        const jsonStr = JSON.stringify(sorted, null, 2);
+        const encoded = btoa(unescape(encodeURIComponent(jsonStr)));
+
+        const putRes = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': 'token ' + token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                message: message,
+                content: encoded,
+                sha: fileSha
+            })
+        });
+
+        if (putRes.ok) {
+            showStatus('저장 완료! 1~2분 후 블로그에 반영됩니다.', 'success');
+            posts = sorted;
+            renderPostList();
+            cancelEdit();
+        } else {
+            const err = await putRes.json();
+            showStatus('저장 실패: ' + (err.message || '알 수 없는 오류'), 'error');
+        }
+    } catch (e) {
+        showStatus('오류: ' + e.message, 'error');
+    }
+}
+</script>
+</body>
+</html>
