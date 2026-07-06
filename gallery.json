@@ -1,56 +1,51 @@
 [
   {
     "src": "images/hero-rafting.jpeg",
-    "caption": "ð£ ì ëë ëê° ëíí!",
+    "caption": "Ã°ÂÂÂ£ Ã¬ÂÂ Ã«ÂÂÃ«ÂÂ Ã«ÂÂÃªÂ°Â Ã«ÂÂÃ­ÂÂÃ­ÂÂ!",
     "wide": true
   },
   {
     "src": "images/rafting-scenic.jpg",
-    "caption": "ð§ ì§ë¦¿í ê¸ë¥ ì²´í",
+    "caption": "Ã°ÂÂÂ§ Ã¬Â§ÂÃ«Â¦Â¿Ã­ÂÂ ÃªÂ¸ÂÃ«Â¥Â Ã¬Â²Â´Ã­ÂÂ",
     "wide": false
   },
   {
     "src": "images/group-photo.jpeg",
-    "caption": "ð¥ ì¶ë° ì  ë¨ì²´ ì¬ì§",
+    "caption": "Ã°ÂÂÂ¥ Ã¬Â¶ÂÃ«Â°Â Ã¬Â Â Ã«ÂÂ¨Ã¬Â²Â´ Ã¬ÂÂ¬Ã¬Â§Â",
     "wide": false
   },
   {
     "src": "images/promo-onestop.png",
-    "caption": "ð  ìì¤í± ìë¹ì¤ ìì¤",
+    "caption": "Ã°ÂÂÂ  Ã¬ÂÂÃ¬ÂÂ¤Ã­ÂÂ± Ã¬ÂÂÃ«Â¹ÂÃ¬ÂÂ¤ Ã¬ÂÂÃ¬ÂÂ¤",
     "wide": false
   },
   {
     "src": "images/promo-family.png",
-    "caption": "ð¨âð©âð§âð¦ ìì´ì í¨ê» ê°ì¡±ì¬í",
+    "caption": "Ã°ÂÂÂ¨Ã¢ÂÂÃ°ÂÂÂ©Ã¢ÂÂÃ°ÂÂÂ§Ã¢ÂÂÃ°ÂÂÂ¦ Ã¬ÂÂÃ¬ÂÂ´Ã¬ÂÂ Ã­ÂÂ¨ÃªÂ»Â ÃªÂ°ÂÃ¬Â¡Â±Ã¬ÂÂ¬Ã­ÂÂ",
     "wide": false
   },
   {
     "src": "images/promo-recommend.png",
-    "caption": "â­ 1ë°2ì¼ ì¶ì² ì½ì¤",
+    "caption": "Ã¢Â­Â 1Ã«Â°Â2Ã¬ÂÂ¼ Ã¬Â¶ÂÃ¬Â²Â Ã¬Â½ÂÃ¬ÂÂ¤",
     "wide": true
   },
   {
     "src": "images/promo-main.png",
-    "caption": "ð¥© ëíí + ì¼ê²¹ì´ ë¬´íë¦¬í!",
+    "caption": "Ã°ÂÂ¥Â© Ã«ÂÂÃ­ÂÂÃ­ÂÂ + Ã¬ÂÂ¼ÃªÂ²Â¹Ã¬ÂÂ´ Ã«Â¬Â´Ã­ÂÂÃ«Â¦Â¬Ã­ÂÂ!",
     "wide": true
   },
   {
     "src": "images/rafting-action.jpg",
-    "caption": "ð ëê°ì ìë¦ë¤ì´ ì ê²½",
+    "caption": "Ã°ÂÂÂ Ã«ÂÂÃªÂ°ÂÃ¬ÂÂ Ã¬ÂÂÃ«Â¦ÂÃ«ÂÂ¤Ã¬ÂÂ´ Ã¬Â ÂÃªÂ²Â½",
     "wide": false
   },
   {
     "src": "images/promo-action.png",
-    "caption": "ð¥ ìì NO.1 ëíí",
+    "caption": "Ã°ÂÂÂ¥ Ã¬ÂÂÃ¬ÂÂ NO.1 Ã«ÂÂÃ­ÂÂÃ­ÂÂ",
     "wide": false
   },
   {
     "src": "gallery/photo_1782771597508_0.jpg",
-    "caption": "",
-    "wide": false
-  },
-  {
-    "src": "gallery/photo_1783342966666_8.jpg",
     "caption": "",
     "wide": false
   }
