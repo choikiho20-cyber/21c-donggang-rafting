@@ -1,51 +1,96 @@
 [
   {
     "src": "images/hero-rafting.jpeg",
-    "caption": "🚣 신나는 동강 래프팅!",
+    "caption": "ð£ ì ëë ëê° ëíí!",
     "wide": true
   },
   {
     "src": "images/rafting-scenic.jpg",
-    "caption": "💧 짜릿한 급류 체험",
+    "caption": "ð§ ì§ë¦¿í ê¸ë¥ ì²´í",
     "wide": false
   },
   {
     "src": "images/group-photo.jpeg",
-    "caption": "👥 출발 전 단체 사진",
+    "caption": "ð¥ ì¶ë° ì  ë¨ì²´ ì¬ì§",
     "wide": false
   },
   {
     "src": "images/promo-onestop.png",
-    "caption": "🏠 원스톱 서비스 시설",
+    "caption": "ð  ìì¤í± ìë¹ì¤ ìì¤",
     "wide": false
   },
   {
     "src": "images/promo-family.png",
-    "caption": "👨‍👩‍👧‍👦 아이와 함께 가족여행",
+    "caption": "ð¨âð©âð§âð¦ ìì´ì í¨ê» ê°ì¡±ì¬í",
     "wide": false
   },
   {
     "src": "images/promo-recommend.png",
-    "caption": "⭐ 1박2일 추천 코스",
+    "caption": "â­ 1ë°2ì¼ ì¶ì² ì½ì¤",
     "wide": true
   },
   {
     "src": "images/promo-main.png",
-    "caption": "🥩 래프팅 + 삼겹살 무한리필!",
+    "caption": "ð¥© ëíí + ì¼ê²¹ì´ ë¬´íë¦¬í!",
     "wide": true
   },
   {
     "src": "images/rafting-action.jpg",
-    "caption": "🌊 동강의 아름다운 절경",
+    "caption": "ð ëê°ì ìë¦ë¤ì´ ì ê²½",
     "wide": false
   },
   {
     "src": "images/promo-action.png",
-    "caption": "🔥 영월 NO.1 래프팅",
+    "caption": "ð¥ ìì NO.1 ëíí",
     "wide": false
   },
   {
     "src": "gallery/photo_1782771597508_0.jpg",
+    "caption": "",
+    "wide": false
+  },
+  {
+    "src": "gallery/photo_1783342949507_0.jpg",
+    "caption": "",
+    "wide": false
+  },
+  {
+    "src": "gallery/photo_1783342951725_1.jpg",
+    "caption": "",
+    "wide": false
+  },
+  {
+    "src": "gallery/photo_1783342953590_2.jpg",
+    "caption": "",
+    "wide": false
+  },
+  {
+    "src": "gallery/photo_1783342955968_3.jpg",
+    "caption": "",
+    "wide": false
+  },
+  {
+    "src": "gallery/photo_1783342957867_4.jpg",
+    "caption": "",
+    "wide": false
+  },
+  {
+    "src": "gallery/photo_1783342959846_5.jpg",
+    "caption": "",
+    "wide": false
+  },
+  {
+    "src": "gallery/photo_1783342962412_6.jpg",
+    "caption": "",
+    "wide": false
+  },
+  {
+    "src": "gallery/photo_1783342964579_7.jpg",
+    "caption": "",
+    "wide": false
+  },
+  {
+    "src": "gallery/photo_1783342966666_8.jpg",
     "caption": "",
     "wide": false
   }
