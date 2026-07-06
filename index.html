@@ -1221,7 +1221,7 @@ async function uploadImageToGitHub(fileName, base64Data) {
             method: 'PUT', headers: { 'Authorization': 'token ' + token, 'Content-Type': 'application/json' },
             body: JSON.stringify({ message: '갤러리 사진 추가: ' + fileName, content: pure })
         });
-        if (putRes.ok) return filePath;
+        if (putRes.ok) return `https://raw.githubusercontent.com/${GAL_REPO_OWNER}/${GAL_REPO_NAME}/main/${filePath}`;
     } catch(e) {}
     return null;
 }
