@@ -1,57 +1,52 @@
 [
   {
     "src": "images/hero-rafting.jpeg",
-    "caption": "Ã°ÂÂÂ£ Ã¬ÂÂ Ã«ÂÂÃ«ÂÂ Ã«ÂÂÃªÂ°Â Ã«ÂÂÃ­ÂÂÃ­ÂÂ!",
+    "caption": "🚣 신나는 동강 래프팅!",
     "wide": true
   },
   {
     "src": "images/rafting-scenic.jpg",
-    "caption": "Ã°ÂÂÂ§ Ã¬Â§ÂÃ«Â¦Â¿Ã­ÂÂ ÃªÂ¸ÂÃ«Â¥Â Ã¬Â²Â´Ã­ÂÂ",
+    "caption": "💧 짜릿한 급류 체험",
     "wide": false
   },
   {
     "src": "images/group-photo.jpeg",
-    "caption": "Ã°ÂÂÂ¥ Ã¬Â¶ÂÃ«Â°Â Ã¬Â Â Ã«ÂÂ¨Ã¬Â²Â´ Ã¬ÂÂ¬Ã¬Â§Â",
+    "caption": "👥 출발 전 단체 사진",
     "wide": false
   },
   {
     "src": "images/promo-onestop.png",
-    "caption": "Ã°ÂÂÂ  Ã¬ÂÂÃ¬ÂÂ¤Ã­ÂÂ± Ã¬ÂÂÃ«Â¹ÂÃ¬ÂÂ¤ Ã¬ÂÂÃ¬ÂÂ¤",
+    "caption": "🏠 원스톱 서비스 시설",
     "wide": false
   },
   {
     "src": "images/promo-family.png",
-    "caption": "Ã°ÂÂÂ¨Ã¢ÂÂÃ°ÂÂÂ©Ã¢ÂÂÃ°ÂÂÂ§Ã¢ÂÂÃ°ÂÂÂ¦ Ã¬ÂÂÃ¬ÂÂ´Ã¬ÂÂ Ã­ÂÂ¨ÃªÂ»Â ÃªÂ°ÂÃ¬Â¡Â±Ã¬ÂÂ¬Ã­ÂÂ",
+    "caption": "👨‍👩‍👧‍👦 아이와 함께 가족여행",
     "wide": false
   },
   {
     "src": "images/promo-recommend.png",
-    "caption": "Ã¢Â­Â 1Ã«Â°Â2Ã¬ÂÂ¼ Ã¬Â¶ÂÃ¬Â²Â Ã¬Â½ÂÃ¬ÂÂ¤",
+    "caption": "⭐ 1박2일 추천 코스",
     "wide": true
   },
   {
     "src": "images/promo-main.png",
-    "caption": "Ã°ÂÂ¥Â© Ã«ÂÂÃ­ÂÂÃ­ÂÂ + Ã¬ÂÂ¼ÃªÂ²Â¹Ã¬ÂÂ´ Ã«Â¬Â´Ã­ÂÂÃ«Â¦Â¬Ã­ÂÂ!",
+    "caption": "🥩 래프팅 + 삼겹살 무한리필!",
     "wide": true
   },
   {
     "src": "images/rafting-action.jpg",
-    "caption": "Ã°ÂÂÂ Ã«ÂÂÃªÂ°ÂÃ¬ÂÂ Ã¬ÂÂÃ«Â¦ÂÃ«ÂÂ¤Ã¬ÂÂ´ Ã¬Â ÂÃªÂ²Â½",
+    "caption": "🌊 동강의 아름다운 절경",
     "wide": false
   },
   {
     "src": "images/promo-action.png",
-    "caption": "Ã°ÂÂÂ¥ Ã¬ÂÂÃ¬ÂÂ NO.1 Ã«ÂÂÃ­ÂÂÃ­ÂÂ",
+    "caption": "🔥 영월 NO.1 래프팅",
     "wide": false
   },
   {
-    "src": "https://raw.githubusercontent.com/choikiho20-cyber/21c-donggang-rafting/main/gallery/photo_1782771597508_0.jpg",
+    "src": "https://raw.githubusercontent.com/choikiho20-cyber/21c-donggang-rafting/main/gallery/photo_1783344902745_0.jpg",
     "caption": "",
-    "wide": false
-  },
-  {
-    "src": "https://raw.githubusercontent.com/choikiho20-cyber/21c-donggang-rafting/main/gallery/photo_1783344050602_0.jpg",
-    "caption": "첫 급류 진입"
     "wide": false
   }
 ]
