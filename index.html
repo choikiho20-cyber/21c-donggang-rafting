@@ -1189,7 +1189,7 @@ async function loadGalleryFromGitHub() {
         const res = await fetch(`https://api.github.com/repos/${GAL_REPO_OWNER}/${GAL_REPO_NAME}/contents/${GAL_JSON_PATH}`);
         if (res.ok) {
             const data = await res.json();
-            const json = JSON.parse(atob(data.content));
+            const json = JSON.parse(decodeURIComponent(escape(atob(data.content))));
             if (json.length > 0) galleryPhotos = json;
         }
     } catch(e) {}
