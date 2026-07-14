@@ -1319,25 +1319,54 @@ function renderGallery() {
     updateVideoSchema();
 }
 
+function showMediaDialog(type) {
+    return new Promise(resolve => {
+        const isYt = type === 'youtube';
+        const overlay = document.createElement('div');
+        overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:100000;display:flex;align-items:center;justify-content:center;padding:16px;';
+        overlay.innerHTML = '<div style="background:#fff;border-radius:16px;padding:28px;width:100%;max-width:480px;box-shadow:0 10px 40px rgba(0,0,0,0.35);">' +
+            '<h3 style="font-family:\'Jua\',sans-serif;font-size:22px;margin-bottom:6px;color:#222;">' + (isYt ? '▶️ YouTube 영상 추가' : '📸 Instagram 게시물 추가') + '</h3>' +
+            '<p style="font-size:13px;color:#888;margin-bottom:18px;">이 창은 확인을 누르기 전까지 사라지지 않습니다. 다른 창에서 링크를 복사해 오세요.</p>' +
+            '<label style="font-size:14px;font-weight:700;color:#555;">링크 붙여넣기</label>' +
+            '<input id="mdUrl" type="text" placeholder="' + (isYt ? 'https://www.youtube.com/watch?v=... 또는 youtu.be/...' : 'https://www.instagram.com/p/... 또는 reel/...') + '" style="width:100%;padding:12px;border:2px solid #ddd;border-radius:8px;margin:6px 0 4px;font-size:14px;box-sizing:border-box;">' +
+            '<div id="mdErr" style="color:#e53935;font-size:13px;min-height:18px;margin-bottom:8px;"></div>' +
+            '<label style="font-size:14px;font-weight:700;color:#555;">설명 <span style="color:#1976d2;">(검색 노출에 중요!)</span></label>' +
+            '<input id="mdCaption" type="text" placeholder="' + (isYt ? '예: 영월 동강래프팅 어라연 코스 급류 체험 영상' : '예: 21세기동강래프팅 가족 래프팅 체험 후기') + '" style="width:100%;padding:12px;border:2px solid #ddd;border-radius:8px;margin:6px 0 20px;font-size:14px;box-sizing:border-box;">' +
+            '<div style="display:flex;gap:10px;">' +
+            '<button id="mdCancel" style="flex:1;padding:13px;border:none;border-radius:8px;background:#eee;color:#555;font-size:15px;font-weight:700;cursor:pointer;">취소</button>' +
+            '<button id="mdOk" style="flex:2;padding:13px;border:none;border-radius:8px;background:' + (isYt ? '#ff0000' : '#dc2743') + ';color:#fff;font-size:15px;font-weight:700;cursor:pointer;">확인 (추가하기)</button>' +
+            '</div></div>';
+        document.body.appendChild(overlay);
+        const urlInput = overlay.querySelector('#mdUrl');
+        urlInput.focus();
+        overlay.querySelector('#mdOk').onclick = () => {
+            const url = urlInput.value.trim();
+            const id = isYt ? extractYouTubeId(url) : extractInstagramId(url);
+            if (!url || !id) {
+                overlay.querySelector('#mdErr').textContent = isYt ? '올바른 YouTube 링크가 아닙니다. 다시 확인해주세요.' : '올바른 Instagram 링크가 아닙니다. 다시 확인해주세요.';
+                return;
+            }
+            const caption = overlay.querySelector('#mdCaption').value.trim();
+            overlay.remove();
+            resolve({ url: url, caption: caption });
+        };
+        overlay.querySelector('#mdCancel').onclick = () => { overlay.remove(); resolve(null); };
+    });
+}
+
 async function addYouTubeVideo() {
-    const url = prompt('YouTube 영상 링크를 붙여넣으세요:\n\n예: https://www.youtube.com/watch?v=xxxxx\n예: https://youtu.be/xxxxx\n예: https://www.youtube.com/shorts/xxxxx');
-    if (!url) return;
-    const vid = extractYouTubeId(url);
-    if (!vid) { alert('올바른 YouTube 링크가 아닙니다.'); return; }
-    const caption = prompt('영상 설명을 입력하세요 (검색 노출에 중요합니다!):\n\n예: 영월 동강래프팅 어라연 코스 급류 체험 영상', '') || '';
-    galleryPhotos.push({ src: url, type: 'youtube', caption: caption, wide: true });
+    const result = await showMediaDialog('youtube');
+    if (!result) return;
+    galleryPhotos.push({ src: result.url, type: 'youtube', caption: result.caption, wide: true });
     renderGallery();
     await saveGalleryToGitHub();
     alert('✅ YouTube 영상이 추가되었습니다!');
 }
 
 async function addInstagramPost() {
-    const url = prompt('Instagram 게시물/릴스 링크를 붙여넣으세요:\n\n예: https://www.instagram.com/p/xxxxx\n예: https://www.instagram.com/reel/xxxxx');
-    if (!url) return;
-    const pid = extractInstagramId(url);
-    if (!pid) { alert('올바른 Instagram 링크가 아닙니다.'); return; }
-    const caption = prompt('게시물 설명을 입력하세요 (검색 노출에 중요합니다!):\n\n예: 21세기동강래프팅 가족 래프팅 체험 후기', '') || '';
-    galleryPhotos.push({ src: url, type: 'instagram', caption: caption, wide: false });
+    const result = await showMediaDialog('instagram');
+    if (!result) return;
+    galleryPhotos.push({ src: result.url, type: 'instagram', caption: result.caption, wide: false });
     renderGallery();
     await saveGalleryToGitHub();
     alert('✅ Instagram 게시물이 추가되었습니다!');
