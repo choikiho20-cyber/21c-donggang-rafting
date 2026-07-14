@@ -73,5 +73,11 @@
     "src": "https://raw.githubusercontent.com/choikiho20-cyber/21c-donggang-rafting/main/gallery/photo_1783344956387_4.jpg",
     "caption": "",
     "wide": false
+  },
+  {
+    "src": "https://youtube.com/shorts/LX4TQF-kJEU?si=ZcewvJ6gRcj5PT6I",
+    "type": "youtube",
+    "caption": "",
+    "wide": true
   }
 ]
