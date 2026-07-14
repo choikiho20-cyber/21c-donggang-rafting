@@ -407,7 +407,7 @@
         .admin-mode .gal-add-card { display: flex; }
         .gal-item .gal-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 64px; height: 64px; background: rgba(255,0,0,0.85); border-radius: 50%; display: flex; align-items: center; justify-content: center; pointer-events: none; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
         .gal-item .gal-play::after { content: ''; border-style: solid; border-width: 12px 0 12px 22px; border-color: transparent transparent transparent #fff; margin-left: 4px; }
-        .gal-ig-frame { position: absolute; top: -54px; left: 0; width: 100%; height: calc(100% + 400px); border: 0; pointer-events: none; background: #fff; }
+        .gal-ig-frame { position: absolute; top: -54px; left: 50%; transform: translateX(-50%); width: 35.2%; height: calc(100% + 400px); border: 0; pointer-events: none; background: #fff; }
         .gal-type-badge { position: absolute; top: 8px; left: 8px; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; color: #fff; z-index: 5; }
         .gal-type-badge.yt { background: #ff0000; }
         .gal-type-badge.ig { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); }
@@ -1276,7 +1276,7 @@ function renderGallery() {
     galleryPhotos.forEach((photo, i) => {
         const div = document.createElement('div');
         const type = photo.type || 'image';
-        div.className = 'gal-item' + (photo.wide ? ' wide' : '') + (type === 'youtube' ? ' gal-youtube' : '') + (type === 'instagram' ? ' gal-instagram' : '');
+        div.className = 'gal-item' + (photo.wide || type === 'instagram' ? ' wide' : '') + (type === 'youtube' ? ' gal-youtube' : '') + (type === 'instagram' ? ' gal-instagram' : '');
         let inner = '<button class="gal-delete" onclick="event.stopPropagation();deletePhoto(' + i + ')" title="삭제">✕</button>';
         if (type === 'youtube') {
             const vid = extractYouTubeId(photo.src);
@@ -1364,7 +1364,7 @@ async function addYouTubeVideo() {
 async function addInstagramPost() {
     const result = await showMediaDialog('instagram');
     if (!result) return;
-    galleryPhotos.push({ src: result.url, type: 'instagram', caption: result.caption, wide: false });
+    galleryPhotos.push({ src: result.url, type: 'instagram', caption: result.caption, wide: true });
     renderGallery();
     await saveGalleryToGitHub();
     alert('✅ Instagram 게시물이 추가되었습니다!');
