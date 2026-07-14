@@ -405,6 +405,15 @@
         .gal-add-card { border: 3px dashed #bbb; border-radius: 12px; display: none; align-items: center; justify-content: center; cursor: pointer; aspect-ratio: 16/10; transition: all 0.3s; background: #f5f5f5; }
         .gal-add-card:hover { border-color: #1976d2; background: #e3f2fd; }
         .admin-mode .gal-add-card { display: flex; }
+        .gal-item .gal-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 64px; height: 64px; background: rgba(255,0,0,0.85); border-radius: 50%; display: flex; align-items: center; justify-content: center; pointer-events: none; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+        .gal-item .gal-play::after { content: ''; border-style: solid; border-width: 12px 0 12px 22px; border-color: transparent transparent transparent #fff; margin-left: 4px; }
+        .gal-item.gal-instagram .gal-play { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+        .gal-item.gal-instagram .gal-play::after { content: ''; border-width: 0; width: 28px; height: 28px; border: 3px solid #fff; border-radius: 6px; margin-left: 0; }
+        .gal-type-badge { position: absolute; top: 8px; left: 8px; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; color: #fff; z-index: 5; }
+        .gal-type-badge.yt { background: #ff0000; }
+        .gal-type-badge.ig { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); }
+        .lightbox-video { max-width: 90vw; max-height: 85vh; width: 900px; height: 506px; border: none; border-radius: 8px; box-shadow: 0 8px 40px rgba(0,0,0,0.5); display: none; }
+        .lightbox-ig { max-width: 90vw; max-height: 85vh; width: 440px; height: 600px; border: none; border-radius: 8px; box-shadow: 0 8px 40px rgba(0,0,0,0.5); display: none; background: #fff; }
         .admin-toggle { position: fixed; bottom: 80px; left: 20px; z-index: 9999; background: #333; color: #fff; border: none; padding: 10px 16px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 700; box-shadow: 0 2px 12px rgba(0,0,0,0.3); }
         .admin-toggle:hover { background: #1976d2; }
         .admin-toggle.active { background: #e53935; }
@@ -838,7 +847,7 @@
 <div class="gallery-wrap">
     <div class="gallery-inner">
         <div class="sec-header">
-            <h2>📸 <span>포토</span> 갤러리</h2>
+            <h2>📸 <span>포토 & 영상</span> 갤러리</h2>
             <p>동강의 아름다운 풍경과 래프팅 현장</p>
             <span class="line"></span>
         </div>
@@ -1253,15 +1262,38 @@ function compressImage(file, maxWidth, quality) {
     });
 }
 
+function extractYouTubeId(url) {
+    const m = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/);
+    return m ? m[1] : null;
+}
+function extractInstagramId(url) {
+    const m = url.match(/instagram\.com\/(?:p|reel|reels)\/([\w-]+)/);
+    return m ? m[1] : null;
+}
+
 function renderGallery() {
     const grid = document.getElementById('galleryGrid');
     grid.innerHTML = '';
     galleryPhotos.forEach((photo, i) => {
         const div = document.createElement('div');
-        div.className = 'gal-item' + (photo.wide ? ' wide' : '');
-        div.innerHTML = '<button class="gal-delete" onclick="event.stopPropagation();deletePhoto(' + i + ')" title="삭제">✕</button>' +
-            '<img src="' + photo.src + '" alt="' + (photo.caption || '갤러리') + '">' +
-            '<div class="gal-overlay"><span>' + (photo.caption || '') + '</span></div>';
+        const type = photo.type || 'image';
+        div.className = 'gal-item' + (photo.wide ? ' wide' : '') + (type === 'youtube' ? ' gal-youtube' : '') + (type === 'instagram' ? ' gal-instagram' : '');
+        let inner = '<button class="gal-delete" onclick="event.stopPropagation();deletePhoto(' + i + ')" title="삭제">✕</button>';
+        if (type === 'youtube') {
+            const vid = extractYouTubeId(photo.src);
+            inner += '<img src="https://img.youtube.com/vi/' + vid + '/hqdefault.jpg" alt="' + (photo.caption || '21세기동강래프팅 영상') + '">';
+            inner += '<div class="gal-play"></div>';
+            inner += '<span class="gal-type-badge yt">YouTube</span>';
+        } else if (type === 'instagram') {
+            const pid = extractInstagramId(photo.src);
+            inner += '<img src="https://www.instagram.com/p/' + pid + '/media/?size=l" alt="' + (photo.caption || '21세기동강래프팅 인스타그램') + '" onerror="this.src=\'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22><rect fill=%22%23f0f0f0%22 width=%22400%22 height=%22300%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2240%22>📸</text></svg>\'">';
+            inner += '<div class="gal-play"></div>';
+            inner += '<span class="gal-type-badge ig">Instagram</span>';
+        } else {
+            inner += '<img src="' + photo.src + '" alt="' + (photo.caption || '21세기동강래프팅 갤러리') + '">';
+        }
+        inner += '<div class="gal-overlay"><span>' + (photo.caption || '') + '</span></div>';
+        div.innerHTML = inner;
         div.onclick = function() { if (!isAdmin) openLightbox(i); };
         div.style.opacity = '0'; div.style.transform = 'translateY(20px)';
         div.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
@@ -1269,11 +1301,58 @@ function renderGallery() {
         obs.observe(div);
         setTimeout(() => { div.style.opacity = '1'; div.style.transform = 'translateY(0)'; }, 50 * i);
     });
-    const addCard = document.createElement('div');
-    addCard.className = 'gal-add-card';
-    addCard.innerHTML = '<div style="text-align:center"><div style="font-size:48px;color:#bbb;">+</div><p style="color:#888;font-size:14px;margin-top:8px;">사진 추가</p></div>';
-    addCard.onclick = () => document.getElementById('galFileInput').click();
-    grid.appendChild(addCard);
+    const addPhoto = document.createElement('div');
+    addPhoto.className = 'gal-add-card';
+    addPhoto.innerHTML = '<div style="text-align:center"><div style="font-size:40px;color:#bbb;">📷</div><p style="color:#888;font-size:13px;margin-top:6px;">사진 추가</p></div>';
+    addPhoto.onclick = () => document.getElementById('galFileInput').click();
+    grid.appendChild(addPhoto);
+    const addYt = document.createElement('div');
+    addYt.className = 'gal-add-card';
+    addYt.innerHTML = '<div style="text-align:center"><div style="font-size:40px;">▶️</div><p style="color:#888;font-size:13px;margin-top:6px;">YouTube 추가</p></div>';
+    addYt.onclick = addYouTubeVideo;
+    grid.appendChild(addYt);
+    const addIg = document.createElement('div');
+    addIg.className = 'gal-add-card';
+    addIg.innerHTML = '<div style="text-align:center"><div style="font-size:40px;">📸</div><p style="color:#888;font-size:13px;margin-top:6px;">Instagram 추가</p></div>';
+    addIg.onclick = addInstagramPost;
+    grid.appendChild(addIg);
+    updateVideoSchema();
+}
+
+async function addYouTubeVideo() {
+    const url = prompt('YouTube 영상 링크를 붙여넣으세요:\n\n예: https://www.youtube.com/watch?v=xxxxx\n예: https://youtu.be/xxxxx\n예: https://www.youtube.com/shorts/xxxxx');
+    if (!url) return;
+    const vid = extractYouTubeId(url);
+    if (!vid) { alert('올바른 YouTube 링크가 아닙니다.'); return; }
+    const caption = prompt('영상 설명을 입력하세요 (검색 노출에 중요합니다!):\n\n예: 영월 동강래프팅 어라연 코스 급류 체험 영상', '') || '';
+    galleryPhotos.push({ src: url, type: 'youtube', caption: caption, wide: true });
+    renderGallery();
+    await saveGalleryToGitHub();
+    alert('✅ YouTube 영상이 추가되었습니다!');
+}
+
+async function addInstagramPost() {
+    const url = prompt('Instagram 게시물/릴스 링크를 붙여넣으세요:\n\n예: https://www.instagram.com/p/xxxxx\n예: https://www.instagram.com/reel/xxxxx');
+    if (!url) return;
+    const pid = extractInstagramId(url);
+    if (!pid) { alert('올바른 Instagram 링크가 아닙니다.'); return; }
+    const caption = prompt('게시물 설명을 입력하세요 (검색 노출에 중요합니다!):\n\n예: 21세기동강래프팅 가족 래프팅 체험 후기', '') || '';
+    galleryPhotos.push({ src: url, type: 'instagram', caption: caption, wide: false });
+    renderGallery();
+    await saveGalleryToGitHub();
+    alert('✅ Instagram 게시물이 추가되었습니다!');
+}
+
+function updateVideoSchema() {
+    let el = document.getElementById('videoSchema');
+    const videos = galleryPhotos.filter(p => p.type === 'youtube');
+    if (videos.length === 0) { if (el) el.remove(); return; }
+    if (!el) { el = document.createElement('script'); el.id = 'videoSchema'; el.type = 'application/ld+json'; document.head.appendChild(el); }
+    const items = videos.map(v => {
+        const vid = extractYouTubeId(v.src);
+        return { '@type': 'VideoObject', 'name': v.caption || '21세기동강래프팅 영상', 'description': v.caption || '강원 영월 동강래프팅 체험 영상', 'thumbnailUrl': 'https://img.youtube.com/vi/' + vid + '/hqdefault.jpg', 'contentUrl': 'https://www.youtube.com/watch?v=' + vid, 'embedUrl': 'https://www.youtube.com/embed/' + vid, 'uploadDate': new Date().toISOString().split('T')[0], 'publisher': { '@type': 'Organization', 'name': '21세기동강래프팅', 'url': 'https://donggang21c.com' } };
+    });
+    el.textContent = JSON.stringify({ '@context': 'https://schema.org', '@graph': items });
 }
 
 async function deletePhoto(index) {
@@ -1403,6 +1482,8 @@ function openAdmin(e) {
     <div class="lightbox-counter" id="lbCounter"></div>
     <button class="lightbox-nav lightbox-prev" onclick="navLightbox(-1)">❮</button>
     <img id="lbImg" src="" alt="">
+    <iframe id="lbVideo" class="lightbox-video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <iframe id="lbIg" class="lightbox-ig" allowfullscreen></iframe>
     <button class="lightbox-nav lightbox-next" onclick="navLightbox(1)">❯</button>
     <div class="lightbox-caption" id="lbCaption"></div>
 </div>
@@ -1416,6 +1497,8 @@ function openLightbox(i) {
 }
 function closeLightbox() {
     document.getElementById('lightbox').classList.remove('active');
+    document.getElementById('lbVideo').src = '';
+    document.getElementById('lbIg').src = '';
     document.body.style.overflow = '';
 }
 function navLightbox(dir) {
@@ -1424,8 +1507,25 @@ function navLightbox(dir) {
 }
 function updateLightbox() {
     var p = galleryPhotos[lbIndex];
-    document.getElementById('lbImg').src = p.src;
-    document.getElementById('lbImg').alt = p.caption || '';
+    var img = document.getElementById('lbImg');
+    var vid = document.getElementById('lbVideo');
+    var ig = document.getElementById('lbIg');
+    var type = p.type || 'image';
+    img.style.display = 'none'; vid.style.display = 'none'; ig.style.display = 'none';
+    vid.src = ''; ig.src = '';
+    if (type === 'youtube') {
+        var ytId = extractYouTubeId(p.src);
+        vid.src = 'https://www.youtube.com/embed/' + ytId + '?autoplay=1&rel=0';
+        vid.style.display = 'block';
+    } else if (type === 'instagram') {
+        var igId = extractInstagramId(p.src);
+        ig.src = 'https://www.instagram.com/p/' + igId + '/embed/';
+        ig.style.display = 'block';
+    } else {
+        img.src = p.src;
+        img.alt = p.caption || '21세기동강래프팅 갤러리';
+        img.style.display = 'block';
+    }
     document.getElementById('lbCaption').textContent = p.caption || '';
     document.getElementById('lbCounter').textContent = (lbIndex + 1) + ' / ' + galleryPhotos.length;
 }
