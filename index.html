@@ -379,8 +379,9 @@
         /* ===== GALLERY ===== */
         .gallery-wrap { background: var(--white); padding: 48px 0; }
         .gallery-inner { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
-        .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
         .gallery-grid .wide { grid-column: span 2; }
+        .gallery-grid .gal-item, .gallery-grid .gal-add-card { min-width: 0; }
         .gal-item { border-radius: 12px; overflow: hidden; position: relative; cursor: pointer; aspect-ratio: 16/10; background: #f0f0f0; }
         .gal-item img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.4s; }
         .gal-item:hover img { transform: scale(1.08); }
@@ -501,7 +502,7 @@
             .day-grid { grid-template-columns: repeat(2, 1fr); }
             .feat-bar-inner { grid-template-columns: repeat(2, 1fr); }
             .reviews-grid { grid-template-columns: 1fr 1fr; }
-            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         }
         @media (max-width: 768px) {
             .top-bar, .header-right { display: none; }
@@ -520,7 +521,7 @@
             .arrow-box { transform: rotate(90deg); padding: 10px 0; }
             .loc-grid { grid-template-columns: 1fr; }
             .reviews-grid { grid-template-columns: 1fr; }
-            .gallery-grid { grid-template-columns: 1fr 1fr; }
+            .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .footer-inner { grid-template-columns: 1fr; }
             .side-float { display: none; }
             .mobile-bottom { display: block; }
@@ -536,7 +537,7 @@
             .hero-content h1 { font-size: 34px; }
             .pkg-tabs { flex-wrap: wrap; }
             .pkg-tab { min-width: 50%; }
-            .gallery-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: minmax(0, 1fr); }
             .gallery-grid .wide { grid-column: span 1; }
             .feat-bar-inner { grid-template-columns: 1fr; }
             .feat-img { height: 160px; }
