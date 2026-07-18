@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="21세기동강래프팅 포토 & 영상 갤러리 - 동강 래프팅의 생생한 현장 사진과 영상을 만나보세요!">
+    <meta name="keywords" content="동강래프팅, 영월래프팅, 래프팅사진, 래프팅영상, 21세기동강래프팅, 동강래프팅갤러리">
+    <title>포토 & 영상 갤러리 | 21세기동강래프팅</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-52PHWVRYYN"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-52PHWVRYYN');
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0a1d3f;
+            --blue: #0066cc;
+            --blue-bright: #00aaff;
+            --sky: #e8f4fd;
+            --green: #00b33c;
+            --green-dark: #008a2e;
+            --yellow: #ffd700;
+            --orange: #ff6600;
+            --red: #ff0033;
+            --white: #ffffff;
+            --gray-50: #f8f9fa;
+            --gray-100: #f0f0f0;
+            --gray-600: #666;
+            --gray-900: #222;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Noto Sans KR', sans-serif; color: var(--gray-900); background: #f0f4f8; overflow-x: hidden; }
+        .bhs { font-family: 'Jua', sans-serif; }
+
+        /* ===== TOP BAR ===== */
+        .top-bar { background: var(--navy); padding: 6px 0; font-size: 13px; }
+        .top-bar-inner { max-width: 1280px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: flex-end; gap: 20px; }
+        .top-bar a { color: rgba(255,255,255,0.7); text-decoration: none; }
+        .top-bar a:hover { color: var(--yellow); }
+
+        /* ===== HEADER ===== */
+        .header { background: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+        .header-inner { max-width: 1280px; margin: 0 auto; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; }
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-icon { width: 56px; height: 56px; background: linear-gradient(135deg, var(--blue), var(--blue-bright)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 28px; box-shadow: 0 3px 12px rgba(0,102,204,0.4); }
+        .logo-text { display: flex; flex-direction: column; }
+        .logo-sub { font-size: 11px; color: var(--blue); font-weight: 600; letter-spacing: 2px; }
+        .logo-main { font-family: 'Jua', sans-serif; font-size: 28px; color: var(--navy); line-height: 1.1; }
+        .logo-main span { color: var(--blue); }
+        .header-right { display: flex; align-items: center; gap: 20px; }
+        .header-phone { display: flex; align-items: center; gap: 10px; }
+        .phone-icon-wrap { width: 44px; height: 44px; border-radius: 50%; background: var(--green); display: flex; align-items: center; justify-content: center; font-size: 20px; }
+        .phone-nums .phone-main { font-family: 'Jua', sans-serif; font-size: 28px; color: var(--red); }
+        .phone-nums .phone-sub { font-size: 11px; color: var(--gray-600); }
+
+        /* MOBILE PHONE BAR */
+        .mobile-phone-bar { display: none; background: var(--navy); padding: 8px 16px; text-align: center; font-size: 13px; color: rgba(255,255,255,0.9); }
+        .mobile-phone-bar a { color: #fff; text-decoration: none; font-weight: 700; }
+        .mobile-phone-bar .mpb-divider { color: rgba(255,255,255,0.4); margin: 0 8px; }
+
+        /* ===== HERO BANNER ===== */
+        .gallery-hero { background: linear-gradient(135deg, var(--navy) 0%, #1a3d6c 60%, var(--blue) 100%); padding: 60px 20px; text-align: center; position: relative; overflow: hidden; }
+        .gallery-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 50%, rgba(0,170,255,0.15) 0%, transparent 60%), radial-gradient(circle at 70% 30%, rgba(255,215,0,0.1) 0%, transparent 50%); }
+        .gallery-hero h1 { font-family: 'Jua', sans-serif; font-size: 52px; color: white; text-shadow: 3px 3px 0 rgba(0,0,0,0.3); position: relative; z-index: 1; margin-bottom: 10px; }
+        .gallery-hero h1 .yellow { color: var(--yellow); text-shadow: 3px 3px 0 rgba(0,0,0,0.3), 0 0 20px rgba(255,215,0,0.4); }
+        .gallery-hero p { font-size: 18px; color: rgba(255,255,255,0.8); position: relative; z-index: 1; }
+
+        /* ===== GALLERY SECTION ===== */
+        .gallery-section { max-width: 1280px; margin: 0 auto; padding: 40px 20px 60px; }
+        .gallery-back { display: inline-flex; align-items: center; gap: 6px; color: var(--blue); text-decoration: none; font-weight: 700; font-size: 15px; margin-bottom: 24px; transition: color 0.2s; }
+        .gallery-back:hover { color: var(--blue-bright); }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
+        }
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            aspect-ratio: 4/3;
+        }
+        .gallery-item:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+        .gallery-item.wide { grid-column: span 2; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .gallery-item video { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .gallery-item iframe { width: 100%; height: 100%; border: none; display: block; pointer-events: none; }
+        .gallery-caption {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: white; padding: 30px 14px 12px; font-size: 14px; font-weight: 700;
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .gallery-item:hover .gallery-caption { opacity: 1; }
+        .gallery-badge {
+            position: absolute; top: 10px; left: 10px;
+            padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; color: white; z-index: 2;
+        }
+        .gallery-badge.youtube { background: #ff0000; }
+        .gallery-badge.instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+        .gallery-badge.video { background: var(--blue); }
+        .play-overlay {
+            position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+            z-index: 1; pointer-events: none;
+        }
+        .play-btn {
+            width: 60px; height: 60px; border-radius: 50%; background: rgba(0,0,0,0.6);
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 28px; border: 3px solid rgba(255,255,255,0.8);
+            transition: transform 0.3s, background 0.3s;
+        }
+        .gallery-item:hover .play-btn { transform: scale(1.1); background: rgba(0,0,0,0.8); }
+        .gallery-delete {
+            position: absolute; top: 8px; right: 8px; z-index: 3;
+            width: 30px; height: 30px; border-radius: 50%;
+            background: var(--red); color: white; border: 2px solid white;
+            font-size: 16px; font-weight: 700; cursor: pointer;
+            display: none; align-items: center; justify-content: center;
+            transition: transform 0.2s;
+        }
+        .gallery-delete:hover { transform: scale(1.15); }
+        body.admin-mode .gallery-delete { display: flex; }
+
+        /* ADD CARDS */
+        .add-card {
+            display: none;
+            border-radius: 12px; border: 3px dashed #ccc;
+            background: rgba(255,255,255,0.7); aspect-ratio: 4/3;
+            flex-direction: column; align-items: center; justify-content: center;
+            gap: 8px; cursor: pointer; transition: all 0.3s; color: var(--gray-600);
+            font-weight: 700; font-size: 15px;
+        }
+        .add-card:hover { border-color: var(--blue); color: var(--blue); background: var(--sky); }
+        .add-card .add-icon { font-size: 36px; }
+        body.admin-mode .add-card { display: flex; }
+
+        /* ===== LIGHTBOX ===== */
+        .lightbox-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.92);
+            z-index: 10000; display: none; align-items: center; justify-content: center;
+            flex-direction: column;
+        }
+        .lightbox-overlay.active { display: flex; }
+        .lightbox-content {
+            position: relative; max-width: 90vw; max-height: 80vh;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .lightbox-content img { max-width: 90vw; max-height: 80vh; object-fit: contain; border-radius: 8px; }
+        .lightbox-content video { max-width: 90vw; max-height: 80vh; border-radius: 8px; }
+        .lightbox-content iframe { width: 80vw; height: 70vh; max-width: 960px; border: none; border-radius: 8px; }
+        .lightbox-close {
+            position: fixed; top: 20px; right: 24px;
+            width: 48px; height: 48px; border-radius: 50%;
+            background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.5);
+            color: white; font-size: 28px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.3s; z-index: 10001;
+        }
+        .lightbox-close:hover { background: rgba(255,255,255,0.3); }
+        .lightbox-nav {
+            position: fixed; top: 50%; transform: translateY(-50%);
+            width: 48px; height: 48px; border-radius: 50%;
+            background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.5);
+            color: white; font-size: 22px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.3s; z-index: 10001;
+        }
+        .lightbox-nav:hover { background: rgba(255,255,255,0.3); }
+        .lightbox-prev { left: 16px; }
+        .lightbox-next { right: 16px; }
+        .lightbox-info {
+            position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+            text-align: center; color: white; z-index: 10001;
+        }
+        .lightbox-caption { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+        .lightbox-counter { font-size: 13px; color: rgba(255,255,255,0.6); }
+
+        /* ===== ADMIN TOGGLE ===== */
+        .admin-toggle {
+            position: fixed; bottom: 20px; left: 20px; z-index: 999;
+            padding: 12px 20px; border-radius: 50px;
+            background: var(--navy); color: white;
+            border: 2px solid var(--yellow); font-weight: 700; font-size: 14px;
+            cursor: pointer; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s; display: none;
+        }
+        .admin-toggle:hover { background: #1a3d6c; transform: translateY(-2px); }
+        body.admin-mode .admin-toggle { background: var(--red); border-color: white; }
+
+        /* ===== MODAL ===== */
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+            z-index: 20000; display: none; align-items: center; justify-content: center;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal {
+            background: white; border-radius: 16px; max-width: 480px; width: 90%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4); animation: modalIn 0.3s ease;
+            overflow: hidden;
+        }
+        @keyframes modalIn { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .modal-header {
+            background: linear-gradient(135deg, var(--blue), var(--blue-bright));
+            padding: 20px 24px; color: white; position: relative;
+        }
+        .modal-header h3 { font-family: 'Jua', sans-serif; font-size: 22px; }
+        .modal-close {
+            position: absolute; top: 12px; right: 14px;
+            background: none; border: none; color: white; font-size: 24px; cursor: pointer;
+        }
+        .modal-body { padding: 24px; }
+        .modal-body label { display: block; font-weight: 700; font-size: 14px; margin-bottom: 6px; color: var(--navy); }
+        .modal-body input[type="text"],
+        .modal-body input[type="url"],
+        .modal-body input[type="password"] {
+            width: 100%; padding: 12px 14px; border: 2px solid #ddd; border-radius: 8px;
+            font-size: 15px; margin-bottom: 16px; transition: border-color 0.3s;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .modal-body input:focus { outline: none; border-color: var(--blue); }
+        .modal-body .preview-area { margin-bottom: 16px; text-align: center; }
+        .modal-body .preview-area img,
+        .modal-body .preview-area video { max-width: 100%; max-height: 200px; border-radius: 8px; }
+        .modal-actions { display: flex; gap: 10px; }
+        .modal-actions button {
+            flex: 1; padding: 12px; border-radius: 10px; font-weight: 700; font-size: 15px;
+            border: none; cursor: pointer; transition: all 0.3s;
+        }
+        .btn-modal-primary { background: linear-gradient(135deg, var(--blue), var(--blue-bright)); color: white; }
+        .btn-modal-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,102,204,0.4); }
+        .btn-modal-cancel { background: #f0f0f0; color: var(--gray-600); }
+        .btn-modal-cancel:hover { background: #e0e0e0; }
+
+        /* ===== LOADING ===== */
+        .gallery-loading {
+            text-align: center; padding: 60px 20px; color: var(--gray-600);
+        }
+        .gallery-loading .spinner {
+            width: 40px; height: 40px; border: 4px solid #ddd; border-top-color: var(--blue);
+            border-radius: 50%; animation: spin 0.8s linear infinite;
+            margin: 0 auto 16px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ===== FOOTER ===== */
+        .footer { background: #0a1628; color: rgba(255,255,255,0.5); padding: 36px 20px 16px; font-size: 13px; }
+        .footer-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 36px; }
+        .footer h4 { color: white; font-size: 15px; margin-bottom: 12px; }
+        .footer p { margin-bottom: 4px; }
+        .footer-bottom { max-width: 1280px; margin: 20px auto 0; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08); text-align: center; font-size: 12px; }
+
+        /* ===== MOBILE BOTTOM BAR ===== */
+        .mobile-bottom { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 999; background: white; box-shadow: 0 -4px 20px rgba(0,0,0,0.15); }
+        .mobile-bottom-inner { display: grid; grid-template-columns: 1fr 1fr; }
+        .mb-btn { padding: 14px; text-align: center; font-weight: 800; font-size: 16px; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .mb-btn.kakao { background: #fee500; color: #3c1e1e; }
+        .mb-btn.call { background: var(--green); color: white; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        @media (max-width: 768px) {
+            .top-bar { display: none; }
+            .header-right { display: none; }
+            .mobile-phone-bar { display: block; }
+            .gallery-hero h1 { font-size: 36px; }
+            .gallery-hero p { font-size: 15px; }
+            .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .footer-inner { grid-template-columns: 1fr; }
+            .mobile-bottom { display: block; }
+            body { padding-bottom: 56px; }
+            .admin-toggle { bottom: 70px; }
+            .lightbox-content iframe { width: 95vw; height: 50vh; }
+        }
+        @media (max-width: 480px) {
+            .gallery-grid { grid-template-columns: minmax(0, 1fr); }
+            .gallery-grid .wide { grid-column: span 1; }
+            .gallery-hero h1 { font-size: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+    <div class="top-bar-inner">
+        <a href="index.html">&#127968; &#54856;</a>
+        <a href="index.html#faq">&#51088;&#51452;&#47931;&#45716;&#51656;&#47928;</a>
+        <a href="index.html#location">&#50724;&#49884;&#45716;&#44600;</a>
+    </div>
+</div>
+
+<!-- HEADER -->
+<header class="header">
+    <div class="header-inner">
+        <a href="index.html" class="logo">
+            <div class="logo-icon">&#x1F6A3;</div>
+            <div class="logo-text">
+                <span class="logo-sub">&#46041;&#44053;&#51032; &#51204;&#49444;</span>
+                <span class="logo-main">21&#49464;&#44592;&#46041;&#44053;<span>&#47000;&#54532;&#54021;</span></span>
+            </div>
+        </a>
+        <div class="header-right">
+            <div class="header-phone">
+                <div class="phone-icon-wrap">&#x1F4DE;</div>
+                <div class="phone-nums">
+                    <span class="phone-main">010-5483-3812</span>
+                    <span class="phone-sub">&#50696;&#50557;&#47928;&#51032;</span>
+                </div>
+            </div>
+            <div class="header-phone" style="margin-left:10px;">
+                <div class="phone-icon-wrap" style="background:var(--blue);">&#x1F4DE;</div>
+                <div class="phone-nums">
+                    <span class="phone-main" style="font-size:22px; color:var(--blue);">033-373-0272</span>
+                    <span class="phone-sub">&#45824;&#54364;&#51204;&#54868;</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- MOBILE PHONE BAR -->
+<div class="mobile-phone-bar">
+    <a href="tel:010-5483-3812">&#50696;&#50557;&#47928;&#51032; 010-5483-3812</a>
+    <span class="mpb-divider">|</span>
+    <a href="tel:033-373-0272">&#45824;&#54364;&#51204;&#54868; 033-373-0272</a>
+</div>
+
+<!-- HERO BANNER -->
+<div class="gallery-hero">
+    <h1>&#x1F4F8; &#54252;&#53664; & &#50689;&#49345; <span class="yellow">&#44040;&#47084;&#47532;</span></h1>
+    <p>&#46041;&#44053; &#47000;&#54532;&#54021;&#51032; &#49373;&#49373;&#54620; &#54788;&#51109; &#49324;&#51652;&#44284; &#50689;&#49345;&#51012; &#47564;&#45208;&#48372;&#49464;&#50836;!</p>
+</div>
+
+<!-- GALLERY SECTION -->
+<section class="gallery-section" id="gallery">
+    <a href="index.html" class="gallery-back">&larr; &#54856;&#51004;&#47196; &#46028;&#50500;&#44032;&#44592;</a>
+    <div class="gallery-loading" id="galleryLoading">
+        <div class="spinner"></div>
+        <p>&#44040;&#47084;&#47532;&#47484; &#48520;&#47084;&#50724;&#45716; &#51473;...</p>
+    </div>
+    <div class="gallery-grid" id="galleryGrid"></div>
+</section>
+
+<!-- ADMIN TOGGLE -->
+<button class="admin-toggle" id="adminToggle" onclick="toggleAdmin()">&#x1F512; &#44288;&#47532;&#47784;&#46300;</button>
+
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    <button class="lightbox-nav lightbox-prev" onclick="navLightbox(-1)">&#10094;</button>
+    <div class="lightbox-content" id="lightboxContent"></div>
+    <button class="lightbox-nav lightbox-next" onclick="navLightbox(1)">&#10095;</button>
+    <div class="lightbox-info">
+        <div class="lightbox-caption" id="lightboxCaption"></div>
+        <div class="lightbox-counter" id="lightboxCounter"></div>
+    </div>
+</div>
+
+<!-- MODAL (shared) -->
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h3 id="modalTitle">&#47784;&#45804;</h3>
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+        </div>
+        <div class="modal-body" id="modalBody"></div>
+    </div>
+</div>
+
+<!-- HIDDEN FILE INPUTS -->
+<input type="file" id="galFileInput" accept="image/*" multiple style="display:none;">
+<input type="file" id="galVideoInput" accept="video/*" style="display:none;">
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div>
+            <h4>21&#49464;&#44592;&#46041;&#44053;&#47000;&#54532;&#54021;</h4>
+            <p>&#51452;&#49548;: &#44053;&#50896; &#50689;&#50900;&#44400; &#50689;&#50900;&#51021; &#46041;&#44053;&#47196; 915 1&#52789;</p>
+            <p>&#45824;&#54364;: &#48177;&#48120;&#55148; | &#49324;&#50629;&#51088;&#46321;&#47197;&#48264;&#54840;: 304-10-03946</p>
+            <p>&#45824;&#54364;&#51204;&#54868;: 033-373-0272 / &#50696;&#50557;&#47928;&#51032;: 010-5483-3812</p>
+            <p>&#44228;&#51340;: &#49888;&#54620;&#51008;&#54665; 010-8844-1244</p>
+        </div>
+        <div>
+            <h4>&#51060;&#50857;&#50504;&#45236;</h4>
+            <p>1&#48149;2&#51068; &#54217;&#51068; &#54056;&#53412;&#51648;</p>
+            <p>1&#48149;2&#51068; &#51452;&#47568;/&#44277;&#55092;&#51068; &#54056;&#53412;&#51648;</p>
+            <p>&#45817;&#51068;&#52824;&#44592; &#47000;&#54532;&#54021;</p>
+            <p>&#45800;&#52404; &#50696;&#50557;</p>
+        </div>
+        <div>
+            <h4>&#44256;&#44061;&#51648;&#50896;</h4>
+            <p>&#51088;&#51452; &#47931;&#45716; &#51656;&#47928;</p>
+            <p>&#50724;&#49884;&#45716; &#44600;</p>
+            <p>&#50696;&#50557; &#48143; &#54872;&#48520; &#50504;&#45236;</p>
+            <p style="margin-top:10px;">
+                <a href="https://www.youtube.com/@21cdonggang" target="_blank" style="color:#ff4444; text-decoration:none; margin-right:12px;">&#9654; YouTube</a>
+                <a href="https://www.instagram.com/21cywplay/" target="_blank" style="color:#e4405f; text-decoration:none; margin-right:12px;">&#x1F4F8; Instagram</a>
+                <a href="https://blog.naver.com/sotong_today" target="_blank" style="color:#03c75a; text-decoration:none;">&#x1F4DD; Blog</a>
+            </p>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 21&#49464;&#44592;&#46041;&#44053;&#47000;&#54532;&#54021;. All rights reserved.</p></div>
+</footer>
+
+<!-- MOBILE BOTTOM BAR -->
+<div class="mobile-bottom">
+    <div class="mobile-bottom-inner">
+        <a href="tel:010-5483-3812" class="mb-btn call">&#x1F4DE; &#51204;&#54868;&#50696;&#50557;</a>
+        <a href="index.html" class="mb-btn kakao">&#127968; &#54856;&#51004;&#47196;</a>
+    </div>
+</div>
+
+<script>
+/* ===== CONFIGURATION ===== */
+const GAL_REPO_OWNER = 'choikiho20-cyber';
+const GAL_REPO_NAME = '21c-donggang-rafting';
+const GAL_JSON_PATH = 'gallery.json';
+
+const defaultPhotos = [
+    { src: 'images/hero-rafting.webp', caption: '신나는 동강 래프팅!', wide: true },
+    { src: 'images/rafting-scenic.webp', caption: '짜릿한 급류 체험', wide: false },
+    { src: 'images/group-photo.webp', caption: '출발 전 단체 사진', wide: false },
+    { src: 'images/promo-onestop.webp', caption: '원스톱 서비스 시설', wide: false },
+    { src: 'images/promo-family.webp', caption: '아이와 함께 가족여행', wide: false },
+    { src: 'images/promo-recommend.webp', caption: '1박2일 추천 코스', wide: true },
+    { src: 'images/promo-main.webp', caption: '래프팅 + 삼겨살 무한리필!', wide: true },
+    { src: 'images/rafting-action.webp', caption: '동강의 아름다운 절경', wide: false },
+    { src: 'images/promo-action.webp', caption: '영월 NO.1 래프팅', wide: false }
+];
+
+let galleryData = [];
+let gallerySha = null;
+let githubToken = '';
+let isAdminMode = false;
+let currentLightbox = -1;
+
+/* ===== INIT ===== */
+document.addEventListener('DOMContentLoaded', function() {
+    loadGalleryFromGitHub();
+
+    document.getElementById('galFileInput').addEventListener('change', handlePhotoUpload);
+    document.getElementById('galVideoInput').addEventListener('change', handleVideoUpload);
+
+    /* Show admin toggle after triple-click on hero */
+    document.querySelector('.gallery-hero').addEventListener('click', function(e) {
+        if (e.detail === 3) {
+            document.getElementById('adminToggle').style.display = 'block';
+        }
+    });
+
+    /* Keyboard for lightbox */
+    document.addEventListener('keydown', function(e) {
+        if (!document.getElementById('lightbox').classList.contains('active')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') navLightbox(-1);
+        if (e.key === 'ArrowRight') navLightbox(1);
+    });
+});
+
+/* ===== LOAD GALLERY FROM GITHUB ===== */
+function loadGalleryFromGitHub() {
+    var url = 'https://api.github.com/repos/' + GAL_REPO_OWNER + '/' + GAL_REPO_NAME + '/contents/' + GAL_JSON_PATH;
+    fetch(url)
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data.content) {
+                var decoded = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
+                galleryData = JSON.parse(decoded);
+                gallerySha = data.sha;
+            } else {
+                galleryData = defaultPhotos.map(function(p) {
+                    return { type: 'image', src: p.src, caption: p.caption, wide: p.wide };
+                });
+            }
+            document.getElementById('galleryLoading').style.display = 'none';
+            renderGallery();
+        })
+        .catch(function() {
+            galleryData = defaultPhotos.map(function(p) {
+                return { type: 'image', src: p.src, caption: p.caption, wide: p.wide };
+            });
+            document.getElementById('galleryLoading').style.display = 'none';
+            renderGallery();
+        });
+}
+
+/* ===== RENDER GALLERY ===== */
+function renderGallery() {
+    var grid = document.getElementById('galleryGrid');
+    grid.innerHTML = '';
+
+    galleryData.forEach(function(item, idx) {
+        var div = document.createElement('div');
+        div.className = 'gallery-item' + (item.wide ? ' wide' : '');
+        var type = item.type || 'image';
+
+        if (type === 'youtube') {
+            var ytId = extractYouTubeId(item.src);
+            if (ytId) {
+                div.innerHTML =
+                    '<img src="https://img.youtube.com/vi/' + ytId + '/hqdefault.jpg" alt="' + (item.caption || '') + '" loading="lazy">' +
+                    '<div class="play-overlay"><div class="play-btn">▶</div></div>' +
+                    '<span class="gallery-badge youtube">YouTube</span>' +
+                    '<button class="gallery-delete" onclick="event.stopPropagation();deletePhoto(' + idx + ')">&times;</button>' +
+                    '<div class="gallery-caption">' + (item.caption || '') + '</div>';
+            }
+        } else if (type === 'instagram') {
+            div.classList.add('wide');
+            var igId = extractInstagramId(item.src);
+            if (igId) {
+                div.innerHTML =
+                    '<iframe src="https://www.instagram.com/p/' + igId + '/embed/" loading="lazy"></iframe>' +
+                    '<span class="gallery-badge instagram">Instagram</span>' +
+                    '<button class="gallery-delete" onclick="event.stopPropagation();deletePhoto(' + idx + ')">&times;</button>' +
+                    '<div class="gallery-caption">' + (item.caption || '') + '</div>';
+            }
+        } else if (type === 'video') {
+            div.innerHTML =
+                '<video preload="none" muted><source src="' + item.src + '"></video>' +
+                '<div class="play-overlay"><div class="play-btn">▶</div></div>' +
+                '<span class="gallery-badge video">동영상</span>' +
+                '<button class="gallery-delete" onclick="event.stopPropagation();deletePhoto(' + idx + ')">&times;</button>' +
+                '<div class="gallery-caption">' + (item.caption || '') + '</div>';
+        } else {
+            div.innerHTML =
+                '<img src="' + item.src + '" alt="' + (item.caption || '') + '" loading="lazy">' +
+                '<button class="gallery-delete" onclick="event.stopPropagation();deletePhoto(' + idx + ')">&times;</button>' +
+                '<div class="gallery-caption">' + (item.caption || '') + '</div>';
+        }
+
+        div.addEventListener('click', function() { openLightbox(idx); });
+        grid.appendChild(div);
+    });
+
+    /* ADD CARDS (admin mode) */
+    var addTypes = [
+        { icon: '📷', label: '사진', action: function() { document.getElementById('galFileInput').click(); } },
+        { icon: '🎬', label: '동영상', action: function() { document.getElementById('galVideoInput').click(); } },
+        { icon: '▶️', label: 'YouTube', action: function() { showMediaDialog('youtube'); } },
+        { icon: '📸', label: 'Instagram', action: function() { showMediaDialog('instagram'); } }
+    ];
+
+    addTypes.forEach(function(t) {
+        var card = document.createElement('div');
+        card.className = 'add-card';
+        card.innerHTML = '<span class="add-icon">' + t.icon + '</span><span>' + t.label + ' 추가</span>';
+        card.addEventListener('click', t.action);
+        grid.appendChild(card);
+    });
+}
+
+/* ===== EXTRACT IDs ===== */
+function extractYouTubeId(url) {
+    var m = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/);
+    return m ? m[1] : null;
+}
+
+function extractInstagramId(url) {
+    var m = url.match(/instagram\.com\/(?:p|reel|reels)\/([\w-]+)/);
+    return m ? m[1] : null;
+}
+
+/* ===== LIGHTBOX ===== */
+function openLightbox(i) {
+    currentLightbox = i;
+    updateLightbox();
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+    document.getElementById('lightboxContent').innerHTML = '';
+    currentLightbox = -1;
+}
+
+function navLightbox(dir) {
+    if (galleryData.length === 0) return;
+    currentLightbox = (currentLightbox + dir + galleryData.length) % galleryData.length;
+    updateLightbox();
+}
+
+function updateLightbox() {
+    var item = galleryData[currentLightbox];
+    if (!item) return;
+    var content = document.getElementById('lightboxContent');
+    var type = item.type || 'image';
+
+    if (type === 'youtube') {
+        var ytId = extractYouTubeId(item.src);
+        content.innerHTML = '<iframe src="https://www.youtube.com/embed/' + ytId + '?autoplay=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+    } else if (type === 'instagram') {
+        var igId = extractInstagramId(item.src);
+        content.innerHTML = '<iframe src="https://www.instagram.com/p/' + igId + '/embed/" allowfullscreen></iframe>';
+    } else if (type === 'video') {
+        content.innerHTML = '<video src="' + item.src + '" controls autoplay></video>';
+    } else {
+        content.innerHTML = '<img src="' + item.src + '" alt="' + (item.caption || '') + '">';
+    }
+
+    document.getElementById('lightboxCaption').textContent = item.caption || '';
+    document.getElementById('lightboxCounter').textContent = (currentLightbox + 1) + ' / ' + galleryData.length;
+}
+
+/* ===== ADMIN MODE ===== */
+function toggleAdmin() {
+    if (!isAdminMode) {
+        var pw = prompt('관리자 비밀번호를 입력하세요:');
+        if (pw !== '2021') {
+            alert('비밀번호가 틀렸습니다.');
+            return;
+        }
+        isAdminMode = true;
+        document.body.classList.add('admin-mode');
+        document.getElementById('adminToggle').innerHTML = '🔒 관리모드 종료';
+    } else {
+        isAdminMode = false;
+        document.body.classList.remove('admin-mode');
+        document.getElementById('adminToggle').innerHTML = '🔒 관리모드';
+    }
+}
+
+/* ===== DELETE ===== */
+function deletePhoto(index) {
+    if (!confirm('이 항목을 삭제하시겠습니까?')) return;
+    galleryData.splice(index, 1);
+    renderGallery();
+    saveGalleryToGitHub();
+}
+
+/* ===== MEDIA DIALOG (YouTube / Instagram) ===== */
+function showMediaDialog(type) {
+    var title = type === 'youtube' ? 'YouTube 영상 추가' : 'Instagram 게시물 추가';
+    var placeholder = type === 'youtube' ? 'https://www.youtube.com/watch?v=...' : 'https://www.instagram.com/p/...';
+
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalBody').innerHTML =
+        '<label>URL</label>' +
+        '<input type="url" id="mediaUrlInput" placeholder="' + placeholder + '">' +
+        '<label>설명 (선택)</label>' +
+        '<input type="text" id="mediaCaptionInput" placeholder="사진/영상 설명을 입력하세요">' +
+        '<div class="modal-actions">' +
+        '<button class="btn-modal-cancel" onclick="closeModal()">취소</button>' +
+        '<button class="btn-modal-primary" onclick="addMediaFromDialog(\'' + type + '\')">추가</button>' +
+        '</div>';
+    document.getElementById('modalOverlay').classList.add('active');
+}
+
+function addMediaFromDialog(type) {
+    var url = document.getElementById('mediaUrlInput').value.trim();
+    var caption = document.getElementById('mediaCaptionInput').value.trim();
+    if (!url) { alert('URL을 입력해주세요.'); return; }
+
+    if (type === 'youtube') {
+        addYouTubeVideo(url, caption);
+    } else {
+        addInstagramPost(url, caption);
+    }
+    closeModal();
+}
+
+function addYouTubeVideo(url, caption) {
+    var ytId = extractYouTubeId(url);
+    if (!ytId) { alert('유효한 YouTube URL을 입력해주세요.'); return; }
+    galleryData.push({ type: 'youtube', src: url, caption: caption || 'YouTube 영상', wide: true });
+    renderGallery();
+    saveGalleryToGitHub();
+}
+
+function addInstagramPost(url, caption) {
+    var igId = extractInstagramId(url);
+    if (!igId) { alert('유효한 Instagram URL을 입력해주세요.'); return; }
+    galleryData.push({ type: 'instagram', src: url, caption: caption || 'Instagram 게시물', wide: true });
+    renderGallery();
+    saveGalleryToGitHub();
+}
+
+/* ===== CAPTION DIALOG ===== */
+function showCaptionDialog(src, idx, total, isVideo) {
+    document.getElementById('modalTitle').textContent = '설명 입력 (' + (idx + 1) + '/' + total + ')';
+    var previewHtml = isVideo
+        ? '<div class="preview-area"><video src="' + src + '" style="max-height:150px;" muted></video></div>'
+        : '<div class="preview-area"><img src="' + src + '"></div>';
+
+    document.getElementById('modalBody').innerHTML =
+        previewHtml +
+        '<label>사진/영상 설명</label>' +
+        '<input type="text" id="captionInput" placeholder="설명을 입력하세요">' +
+        '<div class="modal-actions">' +
+        '<button class="btn-modal-cancel" onclick="closeModal()">건너뛰기</button>' +
+        '<button class="btn-modal-primary" id="captionSubmitBtn">저장</button>' +
+        '</div>';
+    document.getElementById('modalOverlay').classList.add('active');
+
+    return new Promise(function(resolve) {
+        document.getElementById('captionSubmitBtn').onclick = function() {
+            var cap = document.getElementById('captionInput').value.trim();
+            closeModal();
+            resolve(cap);
+        };
+        document.querySelector('.btn-modal-cancel').onclick = function() {
+            closeModal();
+            resolve('');
+        };
+    });
+}
+
+/* ===== TOKEN DIALOG ===== */
+function showTokenDialog() {
+    return new Promise(function(resolve) {
+        document.getElementById('modalTitle').textContent = 'GitHub 토큰 입력';
+        document.getElementById('modalBody').innerHTML =
+            '<label>GitHub Personal Access Token</label>' +
+            '<input type="password" id="tokenInput" placeholder="ghp_...">' +
+            '<p style="font-size:12px;color:#999;margin-bottom:16px;">저장소에 쓰기 권한이 있는 토큰을 입력하세요.</p>' +
+            '<div class="modal-actions">' +
+            '<button class="btn-modal-cancel" id="tokenCancelBtn">취소</button>' +
+            '<button class="btn-modal-primary" id="tokenSubmitBtn">확인</button>' +
+            '</div>';
+        document.getElementById('modalOverlay').classList.add('active');
+
+        document.getElementById('tokenSubmitBtn').onclick = function() {
+            var t = document.getElementById('tokenInput').value.trim();
+            closeModal();
+            resolve(t);
+        };
+        document.getElementById('tokenCancelBtn').onclick = function() {
+            closeModal();
+            resolve('');
+        };
+    });
+}
+
+function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('active');
+}
+
+/* ===== SAVE GALLERY TO GITHUB ===== */
+async function saveGalleryToGitHub() {
+    if (!githubToken) {
+        githubToken = await showTokenDialog();
+        if (!githubToken) return;
+    }
+
+    var jsonStr = JSON.stringify(galleryData, null, 2);
+    var encoded = btoa(unescape(encodeURIComponent(jsonStr)));
+
+    var body = { message: 'Update gallery.json', content: encoded };
+    if (gallerySha) body.sha = gallerySha;
+
+    try {
+        var url = 'https://api.github.com/repos/' + GAL_REPO_OWNER + '/' + GAL_REPO_NAME + '/contents/' + GAL_JSON_PATH;
+        var resp = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Authorization': 'token ' + githubToken,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        });
+        var data = await resp.json();
+        if (data.content && data.content.sha) {
+            gallerySha = data.content.sha;
+        } else if (resp.status === 401) {
+            githubToken = '';
+            alert('토큰이 유효하지 않습니다. 다시 입력해주세요.');
+        }
+    } catch (err) {
+        console.error('Save error:', err);
+    }
+}
+
+/* ===== UPLOAD IMAGE TO GITHUB ===== */
+async function uploadImageToGitHub(fileName, base64Data) {
+    if (!githubToken) {
+        githubToken = await showTokenDialog();
+        if (!githubToken) return null;
+    }
+
+    var path = 'gallery/' + fileName;
+    var url = 'https://api.github.com/repos/' + GAL_REPO_OWNER + '/' + GAL_REPO_NAME + '/contents/' + path;
+
+    try {
+        var resp = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Authorization': 'token ' + githubToken,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                message: 'Upload ' + fileName,
+                content: base64Data
+            })
+        });
+        var data = await resp.json();
+        if (data.content && data.content.download_url) {
+            return data.content.download_url;
+        }
+        if (resp.status === 401) {
+            githubToken = '';
+            alert('토큰이 유효하지 않습니다.');
+        }
+        return null;
+    } catch (err) {
+        console.error('Upload error:', err);
+        return null;
+    }
+}
+
+/* ===== COMPRESS IMAGE ===== */
+function compressImage(file, maxWidth, quality) {
+    maxWidth = maxWidth || 1400;
+    quality = quality || 0.75;
+    return new Promise(function(resolve) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var img = new Image();
+            img.onload = function() {
+                var canvas = document.createElement('canvas');
+                var w = img.width;
+                var h = img.height;
+                if (w > maxWidth) {
+                    h = Math.round(h * maxWidth / w);
+                    w = maxWidth;
+                }
+                canvas.width = w;
+                canvas.height = h;
+                var ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, w, h);
+                var dataUrl = canvas.toDataURL('image/jpeg', quality);
+                var base64 = dataUrl.split(',')[1];
+                resolve({ base64: base64, dataUrl: dataUrl });
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+/* ===== PHOTO UPLOAD HANDLER ===== */
+async function handlePhotoUpload(e) {
+    var files = Array.from(e.target.files);
+    if (!files.length) return;
+
+    for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+        var compressed = await compressImage(file, 1400, 0.75);
+
+        var caption = await showCaptionDialog(compressed.dataUrl, i, files.length, false);
+
+        var timestamp = Date.now();
+        var fileName = 'photo_' + timestamp + '_' + i + '.jpg';
+        var downloadUrl = await uploadImageToGitHub(fileName, compressed.base64);
+
+        if (downloadUrl) {
+            galleryData.push({
+                type: 'image',
+                src: downloadUrl,
+                caption: caption || '',
+                wide: false
+            });
+        }
+    }
+
+    renderGallery();
+    await saveGalleryToGitHub();
+    e.target.value = '';
+}
+
+/* ===== VIDEO UPLOAD HANDLER ===== */
+async function handleVideoUpload(e) {
+    var file = e.target.files[0];
+    if (!file) return;
+
+    if (file.size > 25 * 1024 * 1024) {
+        alert('동영상 파일은 25MB 이하만 업로드 가능합니다.');
+        e.target.value = '';
+        return;
+    }
+
+    var reader = new FileReader();
+    reader.onload = async function(ev) {
+        var base64Full = ev.target.result;
+        var base64Data = base64Full.split(',')[1];
+
+        var caption = await showCaptionDialog(base64Full, 0, 1, true);
+
+        var timestamp = Date.now();
+        var ext = file.name.split('.').pop() || 'mp4';
+        var fileName = 'video_' + timestamp + '.' + ext;
+        var downloadUrl = await uploadImageToGitHub(fileName, base64Data);
+
+        if (downloadUrl) {
+            galleryData.push({
+                type: 'video',
+                src: downloadUrl,
+                caption: caption || '',
+                wide: true
+            });
+            renderGallery();
+            await saveGalleryToGitHub();
+        }
+        e.target.value = '';
+    };
+    reader.readAsDataURL(file);
+}
+
+/* ===== LIGHTBOX OVERLAY CLICK ===== */
+document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeLightbox();
+});
+</script>
+</body>
+</html>

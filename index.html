@@ -372,47 +372,22 @@
         .review-name { font-size: 13px; font-weight: 700; }
         .review-date { font-size: 11px; color: var(--gray-600); }
 
-        /* ===== GALLERY ===== */
+        /* ===== GALLERY PREVIEW ===== */
         .gallery-wrap { background: var(--white); padding: 48px 0; }
         .gallery-inner { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
-        .gallery-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
-        .gallery-grid .wide { grid-column: span 2; }
-        .gallery-grid .gal-item, .gallery-grid .gal-add-card { min-width: 0; }
-        .gal-item { border-radius: 12px; overflow: hidden; position: relative; cursor: pointer; aspect-ratio: 16/10; background: #f0f0f0; }
-        .gal-item img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.4s; }
-        .gal-item:hover img { transform: scale(1.08); }
-        .gal-item .gal-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%); display: flex; align-items: flex-end; padding: 14px; opacity: 0; transition: opacity 0.3s; }
-        .gal-item:hover .gal-overlay { opacity: 1; }
-        .gal-overlay span { color: white; font-size: 14px; font-weight: 600; }
-        .lightbox { display: none; position: fixed; inset: 0; z-index: 99999; background: rgba(0,0,0,0.92); align-items: center; justify-content: center; }
-        .lightbox.active { display: flex; }
-        .lightbox img { max-width: 90vw; max-height: 85vh; object-fit: contain; border-radius: 8px; box-shadow: 0 8px 40px rgba(0,0,0,0.5); }
-        .lightbox-close { position: absolute; top: 20px; right: 24px; background: none; border: none; color: #fff; font-size: 36px; cursor: pointer; z-index: 10; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; }
-        .lightbox-close:hover { color: #ffd700; }
-        .lightbox-caption { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); color: #fff; font-size: 16px; font-weight: 600; text-align: center; text-shadow: 0 2px 8px rgba(0,0,0,0.6); }
-        .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.15); border: none; color: #fff; font-size: 32px; width: 52px; height: 52px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
-        .lightbox-nav:hover { background: rgba(255,255,255,0.3); }
-        .lightbox-prev { left: 16px; }
-        .lightbox-next { right: 16px; }
-        .lightbox-counter { position: absolute; top: 24px; left: 24px; color: rgba(255,255,255,0.7); font-size: 14px; }
-        .gal-delete { position: absolute; top: 8px; right: 8px; width: 32px; height: 32px; background: #e53935; color: #fff; border: none; border-radius: 50%; font-size: 18px; cursor: pointer; z-index: 10; display: none; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
-        .gal-delete:hover { background: #b71c1c; transform: scale(1.1); }
-        .admin-mode .gal-delete { display: flex; }
-        .admin-mode .gal-item:hover .gal-overlay { opacity: 0; }
-        .gal-add-card { border: 3px dashed #bbb; border-radius: 12px; display: none; align-items: center; justify-content: center; cursor: pointer; aspect-ratio: 16/10; transition: all 0.3s; background: #f5f5f5; }
-        .gal-add-card:hover { border-color: #1976d2; background: #e3f2fd; }
-        .admin-mode .gal-add-card { display: flex; }
-        .gal-item .gal-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 64px; height: 64px; background: rgba(255,0,0,0.85); border-radius: 50%; display: flex; align-items: center; justify-content: center; pointer-events: none; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
-        .gal-item .gal-play::after { content: ''; border-style: solid; border-width: 12px 0 12px 22px; border-color: transparent transparent transparent #fff; margin-left: 4px; }
-        .gal-ig-frame { position: absolute; top: -54px; left: 50%; transform: translateX(-50%); width: 50%; height: calc(100% + 400px); border: 0; pointer-events: none; background: #fff; }
-        .gal-type-badge { position: absolute; top: 8px; left: 8px; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; color: #fff; z-index: 5; }
-        .gal-type-badge.yt { background: #ff0000; }
-        .gal-type-badge.ig { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); }
-        .lightbox-video { max-width: 90vw; max-height: 85vh; width: 900px; height: 506px; border: none; border-radius: 8px; box-shadow: 0 8px 40px rgba(0,0,0,0.5); display: none; }
-        .lightbox-ig { max-width: 90vw; max-height: 85vh; width: 440px; height: 600px; border: none; border-radius: 8px; box-shadow: 0 8px 40px rgba(0,0,0,0.5); display: none; background: #fff; }
-        .admin-toggle { position: fixed; bottom: 80px; left: 20px; z-index: 9999; background: #333; color: #fff; border: none; padding: 10px 16px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 700; box-shadow: 0 2px 12px rgba(0,0,0,0.3); }
-        .admin-toggle:hover { background: #1976d2; }
-        .admin-toggle.active { background: #e53935; }
+        .gallery-preview { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+        .gallery-preview .gp-item { border-radius: 12px; overflow: hidden; position: relative; cursor: pointer; aspect-ratio: 16/10; background: #f0f0f0; }
+        .gallery-preview .gp-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+        .gallery-preview .gp-item:hover img { transform: scale(1.08); }
+        .gallery-preview .gp-item .gp-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%); display: flex; align-items: flex-end; padding: 14px; opacity: 0; transition: opacity 0.3s; }
+        .gallery-preview .gp-item:hover .gp-overlay { opacity: 1; }
+        .gp-overlay span { color: white; font-size: 14px; font-weight: 600; }
+        .gp-item .gp-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 56px; height: 56px; background: rgba(255,0,0,0.85); border-radius: 50%; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+        .gp-item .gp-play::after { content: ''; border-style: solid; border-width: 10px 0 10px 18px; border-color: transparent transparent transparent #fff; margin-left: 3px; }
+        .gallery-more { display: inline-block; margin-top: 24px; padding: 16px 40px; background: var(--blue); color: #fff; border-radius: 12px; font-weight: 700; font-size: 16px; text-decoration: none; box-shadow: 0 3px 12px rgba(0,102,204,0.3); transition: all 0.3s; }
+        .gallery-more:hover { background: var(--navy); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,102,204,0.4); }
+        @media (max-width: 768px) { .gallery-preview { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 480px) { .gallery-preview { grid-template-columns: 1fr; } }
 
         /* ===== CTA ===== */
         .cta-big { background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 50%, #45b36b 100%); padding: 48px 20px; text-align: center; position: relative; overflow: hidden; }
@@ -621,12 +596,13 @@
 <nav class="main-nav">
     <div class="main-nav-inner">
         <a href="#hero" class="active">홈</a>
-        <a href="#packages" onclick="switchTab(0)">패키지 <span class="nav-hot">HOT</span></a>
+        <a href="#packages" onclick="switchTab(2)">레포츠패키지</a>
+        <a href="#packages" onclick="switchTab(0)">숙박패키지 <span class="nav-hot">HOT</span></a>
+        <a href="#packages" onclick="switchTab(1)">식사/여행/교통</a>
+        <a href="#packages" onclick="switchTab(3)">단체패키지</a>
         <a href="#reviews">후기</a>
-        <a href="#gallery-section">갤러리</a>
+        <a href="gallery.html">갤러리</a>
         <a href="blog.html">블로그</a>
-        <a href="#faq">FAQ</a>
-        <a href="#location">오시는길</a>
     </div>
 </nav>
 
@@ -888,7 +864,7 @@
     </div>
 </div>
 
-<!-- GALLERY -->
+<!-- GALLERY PREVIEW -->
 <div class="gallery-wrap" id="gallery-section">
     <div class="gallery-inner">
         <div class="sec-header">
@@ -896,10 +872,10 @@
             <p>동강의 아름다운 풍경과 래프팅 현장</p>
             <span class="line"></span>
         </div>
-        <div class="gallery-grid" id="galleryGrid">
+        <div class="gallery-preview" id="galleryPreview"></div>
+        <div style="text-align:center;">
+            <a href="gallery.html" class="gallery-more">갤러리 전체보기 →</a>
         </div>
-        <input type="file" id="galFileInput" accept="image/*" multiple style="display:none">
-        <input type="file" id="galVideoInput" accept="video/*" multiple style="display:none">
     </div>
 </div>
 
@@ -1206,7 +1182,7 @@ function closePopupToday() { closePopup(); localStorage.setItem('popupClosed', n
 if (localStorage.getItem('popupClosed') === new Date().toDateString()) { document.getElementById('popup').classList.add('hidden'); }
 
 const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; } }); }, { threshold: 0.1 });
-document.querySelectorAll('.main-pkg, .day-card, .feat-item, .faq-item, .loc-card, .review-card, .gal-item').forEach(el => { el.style.opacity='0'; el.style.transform='translateY(20px)'; el.style.transition='opacity 0.5s ease, transform 0.5s ease'; obs.observe(el); });
+document.querySelectorAll('.main-pkg, .day-card, .feat-item, .faq-item, .loc-card, .review-card').forEach(el => { el.style.opacity='0'; el.style.transform='translateY(20px)'; el.style.transition='opacity 0.5s ease, transform 0.5s ease'; obs.observe(el); });
 
 // Counter animation
 const counters = document.querySelectorAll('.stat-num[data-target]');
@@ -1220,390 +1196,58 @@ const countObs = new IntersectionObserver(entries => { entries.forEach(e => { if
 }});}, { threshold: 0.5 });
 counters.forEach(c => countObs.observe(c));
 
-// === 갤러리 관리 시스템 (GitHub 저장소 기반) ===
-const GAL_REPO_OWNER = 'choikiho20-cyber';
-const GAL_REPO_NAME = '21c-donggang-rafting';
-const GAL_JSON_PATH = 'gallery.json';
-
-const defaultPhotos = [
-    { src: 'images/hero-rafting.webp', caption: '🚣 신나는 동강 래프팅!', wide: true },
-    { src: 'images/rafting-scenic.webp', caption: '💧 짜릿한 급류 체험', wide: false },
-    { src: 'images/group-photo.webp', caption: '👥 출발 전 단체 사진', wide: false },
-    { src: 'images/promo-onestop.webp', caption: '🏠 원스톱 서비스 시설', wide: false },
-    { src: 'images/promo-family.webp', caption: '👨‍👩‍👧‍👦 아이와 함께 가족여행', wide: false },
-    { src: 'images/promo-recommend.webp', caption: '⭐ 1박2일 추천 코스', wide: true },
-    { src: 'images/promo-main.webp', caption: '🥩 래프팅 + 삼겹살 무한리필!', wide: true },
-    { src: 'images/rafting-action.webp', caption: '🌊 동강의 아름다운 절경', wide: false },
-    { src: 'images/promo-action.webp', caption: '🔥 영월 NO.1 래프팅', wide: false }
-];
-
-let galleryPhotos = [...defaultPhotos];
-let isAdmin = false;
-
-async function loadGalleryFromGitHub() {
-    try {
-        const res = await fetch(`https://api.github.com/repos/${GAL_REPO_OWNER}/${GAL_REPO_NAME}/contents/${GAL_JSON_PATH}`);
-        if (res.ok) {
-            const data = await res.json();
-            const json = JSON.parse(decodeURIComponent(escape(atob(data.content))));
-            if (json.length > 0) galleryPhotos = json;
-        }
-    } catch(e) {}
-    renderGallery();
-}
-
-function getGalToken() {
-    return localStorage.getItem('gh_token');
-}
-
-async function saveGalleryToGitHub() {
-    const token = getGalToken();
-    if (!token) { alert('GitHub 토큰이 필요합니다.\n블로그 관리 페이지에서 토큰을 먼저 설정해주세요.'); return false; }
-    try {
-        let sha = null;
-        const getRes = await fetch(`https://api.github.com/repos/${GAL_REPO_OWNER}/${GAL_REPO_NAME}/contents/${GAL_JSON_PATH}`, {
-            headers: { 'Authorization': 'token ' + token }
-        });
-        if (getRes.ok) { sha = (await getRes.json()).sha; }
-        const body = { message: '갤러리 업데이트', content: btoa(unescape(encodeURIComponent(JSON.stringify(galleryPhotos, null, 2)))) };
-        if (sha) body.sha = sha;
-        const putRes = await fetch(`https://api.github.com/repos/${GAL_REPO_OWNER}/${GAL_REPO_NAME}/contents/${GAL_JSON_PATH}`, {
-            method: 'PUT', headers: { 'Authorization': 'token ' + token, 'Content-Type': 'application/json' },
-            body: JSON.stringify(body)
-        });
-        return putRes.ok;
-    } catch(e) { return false; }
-}
-
-async function uploadImageToGitHub(fileName, base64Data) {
-    const token = getGalToken();
-    if (!token) return null;
-    const pure = base64Data.split(',')[1];
-    const filePath = 'gallery/' + fileName;
-    try {
-        const putRes = await fetch(`https://api.github.com/repos/${GAL_REPO_OWNER}/${GAL_REPO_NAME}/contents/${filePath}`, {
-            method: 'PUT', headers: { 'Authorization': 'token ' + token, 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: '갤러리 사진 추가: ' + fileName, content: pure })
-        });
-        if (putRes.ok) return `https://raw.githubusercontent.com/${GAL_REPO_OWNER}/${GAL_REPO_NAME}/main/${filePath}`;
-    } catch(e) {}
-    return null;
-}
-
-function compressImage(file, maxWidth, quality) {
-    return new Promise(resolve => {
-        const reader = new FileReader();
-        reader.onload = function(ev) {
-            const img = new Image();
-            img.onload = function() {
-                const canvas = document.createElement('canvas');
-                let w = img.width, h = img.height;
-                if (w > maxWidth) { h = Math.round(h * maxWidth / w); w = maxWidth; }
-                canvas.width = w; canvas.height = h;
-                canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-                resolve(canvas.toDataURL('image/jpeg', quality));
-            };
-            img.src = ev.target.result;
-        };
-        reader.readAsDataURL(file);
-    });
-}
-
-function extractYouTubeId(url) {
-    const m = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/);
-    return m ? m[1] : null;
-}
-function extractInstagramId(url) {
-    const m = url.match(/instagram\.com\/(?:p|reel|reels)\/([\w-]+)/);
-    return m ? m[1] : null;
-}
-
-function renderGallery() {
-    const grid = document.getElementById('galleryGrid');
-    grid.innerHTML = '';
-    galleryPhotos.forEach((photo, i) => {
-        const div = document.createElement('div');
-        const type = photo.type || 'image';
-        div.className = 'gal-item' + (photo.wide || type === 'instagram' ? ' wide' : '') + (type === 'youtube' ? ' gal-youtube' : '') + (type === 'instagram' ? ' gal-instagram' : '');
-        let inner = '<button class="gal-delete" onclick="event.stopPropagation();deletePhoto(' + i + ')" title="삭제">✕</button>';
-        if (type === 'youtube') {
-            const vid = extractYouTubeId(photo.src);
-            inner += '<img src="https://img.youtube.com/vi/' + vid + '/hqdefault.jpg" alt="' + (photo.caption || '21세기동강래프팅 영상') + '" loading="lazy">';
-            inner += '<div class="gal-play"></div>';
-            inner += '<span class="gal-type-badge yt">YouTube</span>';
-        } else if (type === 'instagram') {
-            const pid = extractInstagramId(photo.src);
-            inner += '<iframe class="gal-ig-frame" src="https://www.instagram.com/p/' + pid + '/embed/" scrolling="no" loading="lazy" title="' + (photo.caption || '21세기동강래프팅 인스타그램') + '"></iframe>';
-            inner += '<span class="gal-type-badge ig">Instagram</span>';
-        } else if (type === 'video') {
-            inner += '<video src="' + photo.src + '#t=0.1" muted playsinline preload="none" style="width:100%;height:100%;object-fit:cover;"></video>';
-            inner += '<div class="gal-play" style="background:rgba(25,118,210,0.88);"></div>';
-            inner += '<span class="gal-type-badge" style="background:#1976d2;">동영상</span>';
-        } else {
-            inner += '<img src="' + photo.src + '" alt="' + (photo.caption || '21세기동강래프팅 갤러리') + '" loading="lazy">';
-        }
-        inner += '<div class="gal-overlay"><span>' + (photo.caption || '') + '</span></div>';
-        div.innerHTML = inner;
-        div.onclick = function() { if (!isAdmin) openLightbox(i); };
-        div.style.opacity = '0'; div.style.transform = 'translateY(20px)';
-        div.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-        grid.appendChild(div);
-        obs.observe(div);
-        setTimeout(() => { div.style.opacity = '1'; div.style.transform = 'translateY(0)'; }, 50 * i);
-    });
-    const addPhoto = document.createElement('div');
-    addPhoto.className = 'gal-add-card';
-    addPhoto.innerHTML = '<div style="text-align:center"><div style="font-size:40px;color:#bbb;">📷</div><p style="color:#888;font-size:13px;margin-top:6px;">사진 추가</p></div>';
-    addPhoto.onclick = () => document.getElementById('galFileInput').click();
-    grid.appendChild(addPhoto);
-    const addVid = document.createElement('div');
-    addVid.className = 'gal-add-card';
-    addVid.innerHTML = '<div style="text-align:center"><div style="font-size:40px;">🎬</div><p style="color:#888;font-size:13px;margin-top:6px;">동영상 추가</p></div>';
-    addVid.onclick = () => document.getElementById('galVideoInput').click();
-    grid.appendChild(addVid);
-    const addYt = document.createElement('div');
-    addYt.className = 'gal-add-card';
-    addYt.innerHTML = '<div style="text-align:center"><div style="font-size:40px;">▶️</div><p style="color:#888;font-size:13px;margin-top:6px;">YouTube 추가</p></div>';
-    addYt.onclick = addYouTubeVideo;
-    grid.appendChild(addYt);
-    const addIg = document.createElement('div');
-    addIg.className = 'gal-add-card';
-    addIg.innerHTML = '<div style="text-align:center"><div style="font-size:40px;">📸</div><p style="color:#888;font-size:13px;margin-top:6px;">Instagram 추가</p></div>';
-    addIg.onclick = addInstagramPost;
-    grid.appendChild(addIg);
-    updateVideoSchema();
-}
-
-function showCaptionDialog(src, idx, total, isVideo) {
-    return new Promise(resolve => {
-        const overlay = document.createElement('div');
-        overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:100000;display:flex;align-items:center;justify-content:center;padding:16px;';
-        const media = isVideo
-            ? '<video src="' + src + '#t=0.1" muted playsinline preload="metadata" style="max-width:100%;max-height:220px;border-radius:10px;display:block;margin:0 auto 14px;"></video>'
-            : '<img src="' + src + '" style="max-width:100%;max-height:220px;border-radius:10px;display:block;margin:0 auto 14px;">';
-        overlay.innerHTML = '<div style="background:#fff;border-radius:16px;padding:26px;width:100%;max-width:460px;box-shadow:0 10px 40px rgba(0,0,0,0.35);">' +
-            '<h3 style="font-family:\'Jua\',sans-serif;font-size:20px;margin-bottom:4px;color:#222;">📝 설명 입력 (' + idx + '/' + total + ')</h3>' +
-            '<p style="font-size:13px;color:#888;margin-bottom:14px;">이 창은 저장/건너뛰기를 누르기 전까지 사라지지 않습니다. 다른 창에서 복사해 와도 됩니다.</p>' +
-            media +
-            '<input id="capInput" type="text" placeholder="예: 영월 동강래프팅 어라연 코스 급류 체험" style="width:100%;padding:12px;border:2px solid #ddd;border-radius:8px;margin-bottom:6px;font-size:14px;box-sizing:border-box;">' +
-            '<p style="font-size:12px;color:#1976d2;margin-bottom:16px;">💡 설명을 쓰면 구글 검색 노출에 유리합니다 (지역명+업체명+내용 조합 추천)</p>' +
-            '<div style="display:flex;gap:10px;">' +
-            '<button id="capSkip" style="flex:1;padding:13px;border:none;border-radius:8px;background:#eee;color:#555;font-size:15px;font-weight:700;cursor:pointer;">건너뛰기</button>' +
-            '<button id="capOk" style="flex:2;padding:13px;border:none;border-radius:8px;background:#1976d2;color:#fff;font-size:15px;font-weight:700;cursor:pointer;">저장</button>' +
-            '</div></div>';
-        document.body.appendChild(overlay);
-        const input = overlay.querySelector('#capInput');
-        input.focus();
-        overlay.querySelector('#capOk').onclick = () => { const v = input.value.trim(); overlay.remove(); resolve(v); };
-        overlay.querySelector('#capSkip').onclick = () => { overlay.remove(); resolve(null); };
-    });
-}
-
-function showTokenDialog() {
-    return new Promise(resolve => {
-        const overlay = document.createElement('div');
-        overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:100000;display:flex;align-items:center;justify-content:center;padding:16px;';
-        overlay.innerHTML = '<div style="background:#fff;border-radius:16px;padding:26px;width:100%;max-width:460px;box-shadow:0 10px 40px rgba(0,0,0,0.35);">' +
-            '<h3 style="font-family:\'Jua\',sans-serif;font-size:20px;margin-bottom:4px;color:#222;">🔑 GitHub 토큰 입력</h3>' +
-            '<p style="font-size:13px;color:#888;margin-bottom:14px;">블로그 관리에서 쓰는 토큰과 동일합니다. 이 창은 확인을 누르기 전까지 사라지지 않으니, 다른 창에서 복사해 오세요.</p>' +
-            '<input id="tokInput" type="text" placeholder="ghp_ 로 시작하는 토큰" style="width:100%;padding:12px;border:2px solid #ddd;border-radius:8px;margin-bottom:16px;font-size:14px;box-sizing:border-box;">' +
-            '<div style="display:flex;gap:10px;">' +
-            '<button id="tokCancel" style="flex:1;padding:13px;border:none;border-radius:8px;background:#eee;color:#555;font-size:15px;font-weight:700;cursor:pointer;">취소</button>' +
-            '<button id="tokOk" style="flex:2;padding:13px;border:none;border-radius:8px;background:#333;color:#fff;font-size:15px;font-weight:700;cursor:pointer;">확인</button>' +
-            '</div></div>';
-        document.body.appendChild(overlay);
-        const input = overlay.querySelector('#tokInput');
-        input.focus();
-        overlay.querySelector('#tokOk').onclick = () => { const v = input.value.trim(); overlay.remove(); resolve(v || null); };
-        overlay.querySelector('#tokCancel').onclick = () => { overlay.remove(); resolve(null); };
-    });
-}
-
-function showMediaDialog(type) {
-    return new Promise(resolve => {
-        const isYt = type === 'youtube';
-        const overlay = document.createElement('div');
-        overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:100000;display:flex;align-items:center;justify-content:center;padding:16px;';
-        overlay.innerHTML = '<div style="background:#fff;border-radius:16px;padding:28px;width:100%;max-width:480px;box-shadow:0 10px 40px rgba(0,0,0,0.35);">' +
-            '<h3 style="font-family:\'Jua\',sans-serif;font-size:22px;margin-bottom:6px;color:#222;">' + (isYt ? '▶️ YouTube 영상 추가' : '📸 Instagram 게시물 추가') + '</h3>' +
-            '<p style="font-size:13px;color:#888;margin-bottom:18px;">이 창은 확인을 누르기 전까지 사라지지 않습니다. 다른 창에서 링크를 복사해 오세요.</p>' +
-            '<label style="font-size:14px;font-weight:700;color:#555;">링크 붙여넣기</label>' +
-            '<input id="mdUrl" type="text" placeholder="' + (isYt ? 'https://www.youtube.com/watch?v=... 또는 youtu.be/...' : 'https://www.instagram.com/p/... 또는 reel/...') + '" style="width:100%;padding:12px;border:2px solid #ddd;border-radius:8px;margin:6px 0 4px;font-size:14px;box-sizing:border-box;">' +
-            '<div id="mdErr" style="color:#e53935;font-size:13px;min-height:18px;margin-bottom:8px;"></div>' +
-            '<label style="font-size:14px;font-weight:700;color:#555;">설명 <span style="color:#1976d2;">(검색 노출에 중요!)</span></label>' +
-            '<input id="mdCaption" type="text" placeholder="' + (isYt ? '예: 영월 동강래프팅 어라연 코스 급류 체험 영상' : '예: 21세기동강래프팅 가족 래프팅 체험 후기') + '" style="width:100%;padding:12px;border:2px solid #ddd;border-radius:8px;margin:6px 0 20px;font-size:14px;box-sizing:border-box;">' +
-            '<div style="display:flex;gap:10px;">' +
-            '<button id="mdCancel" style="flex:1;padding:13px;border:none;border-radius:8px;background:#eee;color:#555;font-size:15px;font-weight:700;cursor:pointer;">취소</button>' +
-            '<button id="mdOk" style="flex:2;padding:13px;border:none;border-radius:8px;background:' + (isYt ? '#ff0000' : '#dc2743') + ';color:#fff;font-size:15px;font-weight:700;cursor:pointer;">확인 (추가하기)</button>' +
-            '</div></div>';
-        document.body.appendChild(overlay);
-        const urlInput = overlay.querySelector('#mdUrl');
-        urlInput.focus();
-        overlay.querySelector('#mdOk').onclick = () => {
-            const url = urlInput.value.trim();
-            const id = isYt ? extractYouTubeId(url) : extractInstagramId(url);
-            if (!url || !id) {
-                overlay.querySelector('#mdErr').textContent = isYt ? '올바른 YouTube 링크가 아닙니다. 다시 확인해주세요.' : '올바른 Instagram 링크가 아닙니다. 다시 확인해주세요.';
-                return;
+// === 갤러리 프리뷰 (메인페이지용) ===
+(function() {
+    const PREVIEW_COUNT = 4;
+    const defaultPreview = [
+        { src: 'images/hero-rafting.webp', caption: '신나는 동강 래프팅!' },
+        { src: 'images/rafting-scenic.webp', caption: '짜릿한 급류 체험' },
+        { src: 'images/group-photo.webp', caption: '출발 전 단체 사진' },
+        { src: 'images/promo-family.webp', caption: '아이와 함께 가족여행' }
+    ];
+    function extractYouTubeId(url) {
+        const m = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/);
+        return m ? m[1] : null;
+    }
+    function renderPreview(photos) {
+        const grid = document.getElementById('galleryPreview');
+        if (!grid) return;
+        grid.innerHTML = '';
+        const items = photos.filter(p => (p.type || 'image') !== 'instagram').slice(0, PREVIEW_COUNT);
+        items.forEach((photo, i) => {
+            const div = document.createElement('div');
+            div.className = 'gp-item';
+            const type = photo.type || 'image';
+            let inner = '';
+            if (type === 'youtube') {
+                const vid = extractYouTubeId(photo.src);
+                inner = '<img src="https://img.youtube.com/vi/' + vid + '/hqdefault.jpg" alt="' + (photo.caption || '동강래프팅 영상') + '" loading="lazy"><div class="gp-play"></div>';
+            } else if (type === 'video') {
+                inner = '<video src="' + photo.src + '#t=0.1" muted playsinline preload="none" style="width:100%;height:100%;object-fit:cover;"></video><div class="gp-play" style="background:rgba(25,118,210,0.88);"></div>';
+            } else {
+                inner = '<img src="' + photo.src + '" alt="' + (photo.caption || '동강래프팅 갤러리') + '" loading="lazy">';
             }
-            const caption = overlay.querySelector('#mdCaption').value.trim();
-            overlay.remove();
-            resolve({ url: url, caption: caption });
-        };
-        overlay.querySelector('#mdCancel').onclick = () => { overlay.remove(); resolve(null); };
-    });
-}
-
-async function addYouTubeVideo() {
-    const result = await showMediaDialog('youtube');
-    if (!result) return;
-    galleryPhotos.push({ src: result.url, type: 'youtube', caption: result.caption, wide: true });
-    renderGallery();
-    await saveGalleryToGitHub();
-    alert('✅ YouTube 영상이 추가되었습니다!');
-}
-
-async function addInstagramPost() {
-    const result = await showMediaDialog('instagram');
-    if (!result) return;
-    galleryPhotos.push({ src: result.url, type: 'instagram', caption: result.caption, wide: true });
-    renderGallery();
-    await saveGalleryToGitHub();
-    alert('✅ Instagram 게시물이 추가되었습니다!');
-}
-
-function updateVideoSchema() {
-    let el = document.getElementById('videoSchema');
-    const videos = galleryPhotos.filter(p => p.type === 'youtube' || p.type === 'video');
-    if (videos.length === 0) { if (el) el.remove(); return; }
-    if (!el) { el = document.createElement('script'); el.id = 'videoSchema'; el.type = 'application/ld+json'; document.head.appendChild(el); }
-    const items = videos.map(v => {
-        if (v.type === 'youtube') {
-            const vid = extractYouTubeId(v.src);
-            return { '@type': 'VideoObject', 'name': v.caption || '21세기동강래프팅 영상', 'description': v.caption || '강원 영월 동강래프팅 체험 영상', 'thumbnailUrl': 'https://img.youtube.com/vi/' + vid + '/hqdefault.jpg', 'contentUrl': 'https://www.youtube.com/watch?v=' + vid, 'embedUrl': 'https://www.youtube.com/embed/' + vid, 'uploadDate': new Date().toISOString().split('T')[0], 'publisher': { '@type': 'Organization', 'name': '21세기동강래프팅', 'url': 'https://donggang21c.com' } };
-        }
-        return { '@type': 'VideoObject', 'name': v.caption || '21세기동강래프팅 동영상', 'description': v.caption || '강원 영월 동강래프팅 체험 영상', 'thumbnailUrl': 'https://donggang21c.com/images/hero-rafting.webp', 'contentUrl': v.src, 'uploadDate': new Date().toISOString().split('T')[0], 'publisher': { '@type': 'Organization', 'name': '21세기동강래프팅', 'url': 'https://donggang21c.com' } };
-    });
-    el.textContent = JSON.stringify({ '@context': 'https://schema.org', '@graph': items });
-}
-
-async function deletePhoto(index) {
-    if (!confirm('이 사진을 삭제하시겠습니까?')) return;
-    galleryPhotos.splice(index, 1);
-    renderGallery();
-    await saveGalleryToGitHub();
-}
-
-document.getElementById('galFileInput').addEventListener('change', async function(e) {
-    const files = Array.from(e.target.files);
-    if (files.length === 0) return;
-    if (!getGalToken()) {
-        const inputToken = await showTokenDialog();
-        if (!inputToken) { e.target.value = ''; return; }
-        localStorage.setItem('gh_token', inputToken);
+            inner += '<div class="gp-overlay"><span>' + (photo.caption || '') + '</span></div>';
+            div.innerHTML = inner;
+            div.onclick = function() { window.location.href = 'gallery.html'; };
+            div.style.opacity = '0'; div.style.transform = 'translateY(20px)';
+            div.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            grid.appendChild(div);
+            obs.observe(div);
+            setTimeout(function() { div.style.opacity = '1'; div.style.transform = 'translateY(0)'; }, 80 * i);
+        });
     }
-    const status = document.createElement('div');
-    status.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.85);color:#fff;padding:30px 40px;border-radius:12px;z-index:99999;font-size:18px;text-align:center;min-width:280px;';
-    document.body.appendChild(status);
-    let added = 0;
-    for (let i = 0; i < files.length; i++) {
-        status.innerHTML = `📷 사진 업로드 중... (${i+1}/${files.length})<br><small style="color:#aaa;">압축 → GitHub 저장</small>`;
-        const compressed = await compressImage(files[i], 1400, 0.75);
-        const ts = Date.now();
-        const fileName = `photo_${ts}_${i}.jpg`;
-        const uploaded = await uploadImageToGitHub(fileName, compressed);
-        if (uploaded) {
-            galleryPhotos.push({ src: uploaded, caption: '', wide: false });
-            added++;
-        } else {
-            status.innerHTML = `⚠️ 사진 ${i+1} 업로드 실패. 토큰을 확인해주세요.`;
-            await new Promise(r => setTimeout(r, 2000));
-        }
-    }
-    if (added > 0) {
-        status.innerHTML = `💾 갤러리 저장 중...`;
-        await saveGalleryToGitHub();
-        status.remove();
-        renderGallery();
-        let capChanged = false;
-        for (let j = galleryPhotos.length - added; j < galleryPhotos.length; j++) {
-            const cap = await showCaptionDialog(galleryPhotos[j].src, j - (galleryPhotos.length - added) + 1, added, false);
-            if (cap) { galleryPhotos[j].caption = cap; capChanged = true; }
-        }
-        if (capChanged) { await saveGalleryToGitHub(); renderGallery(); }
-    } else {
-        setTimeout(() => status.remove(), 2000);
-    }
-    e.target.value = '';
-});
-
-document.getElementById('galVideoInput').addEventListener('change', async function(e) {
-    const files = Array.from(e.target.files);
-    if (files.length === 0) return;
-    if (!getGalToken()) {
-        const inputToken = await showTokenDialog();
-        if (!inputToken) { e.target.value = ''; return; }
-        localStorage.setItem('gh_token', inputToken);
-    }
-    const MAX_MB = 25;
-    const status = document.createElement('div');
-    status.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.85);color:#fff;padding:30px 40px;border-radius:12px;z-index:99999;font-size:18px;text-align:center;min-width:280px;';
-    document.body.appendChild(status);
-    let added = 0;
-    for (let i = 0; i < files.length; i++) {
-        const f = files[i];
-        if (f.size > MAX_MB * 1024 * 1024) {
-            status.style.display = 'none';
-            alert('"' + f.name + '" 용량이 너무 큽니다 (' + Math.round(f.size / 1024 / 1024) + 'MB, 최대 ' + MAX_MB + 'MB).\n\n긴 영상은 YouTube에 올린 뒤 "YouTube 추가"를 이용해주세요.\n검색 노출에도 YouTube가 훨씬 유리합니다!');
-            status.style.display = 'block';
-            continue;
-        }
-        status.innerHTML = `🎬 동영상 업로드 중... (${i + 1}/${files.length})<br><small style="color:#aaa;">용량에 따라 몇 분 걸릴 수 있습니다</small>`;
-        const dataUrl = await new Promise(r => { const fr = new FileReader(); fr.onload = ev => r(ev.target.result); fr.readAsDataURL(f); });
-        const ext = ((f.name.split('.').pop() || 'mp4').toLowerCase().replace(/[^a-z0-9]/g, '')) || 'mp4';
-        const fileName = `video_${Date.now()}_${i}.${ext}`;
-        const uploaded = await uploadImageToGitHub(fileName, dataUrl);
-        if (uploaded) {
-            galleryPhotos.push({ src: uploaded, type: 'video', caption: '', wide: false });
-            added++;
-        } else {
-            status.innerHTML = `⚠️ 동영상 ${i + 1} 업로드 실패. 토큰과 용량을 확인해주세요.`;
-            await new Promise(r => setTimeout(r, 2500));
-        }
-    }
-    if (added > 0) {
-        status.innerHTML = `💾 갤러리 저장 중...`;
-        await saveGalleryToGitHub();
-        status.remove();
-        renderGallery();
-        let capChanged = false;
-        for (let j = galleryPhotos.length - added; j < galleryPhotos.length; j++) {
-            const cap = await showCaptionDialog(galleryPhotos[j].src, j - (galleryPhotos.length - added) + 1, added, true);
-            if (cap) { galleryPhotos[j].caption = cap; capChanged = true; }
-        }
-        if (capChanged) { await saveGalleryToGitHub(); renderGallery(); }
-    } else {
-        setTimeout(() => status.remove(), 1500);
-    }
-    e.target.value = '';
-});
-
-function toggleAdmin() {
-    isAdmin = !isAdmin;
-    document.querySelector('.gallery-wrap').classList.toggle('admin-mode', isAdmin);
-    const btn = document.getElementById('adminToggle');
-    btn.classList.toggle('active', isAdmin);
-    btn.textContent = isAdmin ? '🔒 관리모드 종료' : '⚙️ 갤러리 관리';
-}
-
-async function resetGallery() {
-    if (!confirm('갤러리를 기본 사진으로 초기화하시겠습니까?')) return;
-    galleryPhotos = [...defaultPhotos];
-    renderGallery();
-    await saveGalleryToGitHub();
-}
-
-loadGalleryFromGitHub();
+    fetch('https://api.github.com/repos/choikiho20-cyber/21c-donggang-rafting/contents/gallery.json')
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .then(function(data) {
+            if (data && data.content) {
+                var json = JSON.parse(decodeURIComponent(escape(atob(data.content))));
+                if (json.length > 0) { renderPreview(json); return; }
+            }
+            renderPreview(defaultPreview);
+        })
+        .catch(function() { renderPreview(defaultPreview); });
+})();
 
 function openBooking(e) {
     e.preventDefault();
@@ -1640,7 +1284,7 @@ function openAdmin(e) {
         <div style="background:#fff;border-radius:16px;padding:32px;max-width:400px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
             <h2 style="margin:0 0 20px;font-size:22px;">⚙️ 관리자 설정</h2>
             <div style="display:flex;flex-direction:column;gap:12px;">
-                <button onclick="document.getElementById('adminPanel').remove();toggleAdmin();document.querySelector('.gallery-wrap').scrollIntoView({behavior:'smooth'});" style="padding:14px;border:none;border-radius:10px;background:#1976d2;color:#fff;font-size:15px;font-weight:700;cursor:pointer;">🖼️ 갤러리 사진 관리</button>
+                <button onclick="document.getElementById('adminPanel').remove();window.open('gallery.html','_blank');" style="padding:14px;border:none;border-radius:10px;background:#1976d2;color:#fff;font-size:15px;font-weight:700;cursor:pointer;">🖼️ 갤러리 사진 관리</button>
                 <button onclick="document.getElementById('adminPanel').remove();window.open('blog-admin.html','_blank');" style="padding:14px;border:none;border-radius:10px;background:#e91e63;color:#fff;font-size:15px;font-weight:700;cursor:pointer;">📝 블로그 관리</button>
                 <button onclick="document.getElementById('adminPanel').remove();window.open('blog.html','_blank');" style="padding:14px;border:none;border-radius:10px;background:#ff5722;color:#fff;font-size:15px;font-weight:700;cursor:pointer;">📰 블로그 글 보기</button>
                 <button onclick="document.getElementById('adminPanel').remove();window.open('https://analytics.google.com','_blank');" style="padding:14px;border:none;border-radius:10px;background:#f57c00;color:#fff;font-size:15px;font-weight:700;cursor:pointer;">📊 방문자 통계 (GA)</button>
@@ -1655,79 +1299,6 @@ function openAdmin(e) {
     document.body.appendChild(panel);
     panel.addEventListener('click', function(ev) { if (ev.target === panel) panel.remove(); });
 }
-</script>
-<button id="adminToggle" class="admin-toggle" onclick="toggleAdmin()" style="display:none;">⚙️ 갤러리 관리</button>
-
-<div class="lightbox" id="lightbox">
-    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-    <div class="lightbox-counter" id="lbCounter"></div>
-    <button class="lightbox-nav lightbox-prev" onclick="navLightbox(-1)">❮</button>
-    <img id="lbImg" src="" alt="">
-    <iframe id="lbVideo" class="lightbox-video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    <iframe id="lbIg" class="lightbox-ig" allowfullscreen></iframe>
-    <video id="lbVid" controls playsinline style="display:none;max-width:90vw;max-height:85vh;border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,0.5);"></video>
-    <button class="lightbox-nav lightbox-next" onclick="navLightbox(1)">❯</button>
-    <div class="lightbox-caption" id="lbCaption"></div>
-</div>
-<script>
-let lbIndex = 0;
-function openLightbox(i) {
-    lbIndex = i;
-    updateLightbox();
-    document.getElementById('lightbox').classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('active');
-    document.getElementById('lbVideo').src = '';
-    document.getElementById('lbIg').src = '';
-    var vidf = document.getElementById('lbVid');
-    vidf.pause(); vidf.removeAttribute('src');
-    document.body.style.overflow = '';
-}
-function navLightbox(dir) {
-    lbIndex = (lbIndex + dir + galleryPhotos.length) % galleryPhotos.length;
-    updateLightbox();
-}
-function updateLightbox() {
-    var p = galleryPhotos[lbIndex];
-    var img = document.getElementById('lbImg');
-    var vid = document.getElementById('lbVideo');
-    var ig = document.getElementById('lbIg');
-    var vidf = document.getElementById('lbVid');
-    var type = p.type || 'image';
-    img.style.display = 'none'; vid.style.display = 'none'; ig.style.display = 'none'; vidf.style.display = 'none';
-    vid.src = ''; ig.src = '';
-    vidf.pause(); vidf.removeAttribute('src');
-    if (type === 'youtube') {
-        var ytId = extractYouTubeId(p.src);
-        vid.src = 'https://www.youtube.com/embed/' + ytId + '?autoplay=1&rel=0';
-        vid.style.display = 'block';
-    } else if (type === 'instagram') {
-        var igId = extractInstagramId(p.src);
-        ig.src = 'https://www.instagram.com/p/' + igId + '/embed/';
-        ig.style.display = 'block';
-    } else if (type === 'video') {
-        vidf.src = p.src;
-        vidf.style.display = 'block';
-        vidf.play().catch(function(){});
-    } else {
-        img.src = p.src;
-        img.alt = p.caption || '21세기동강래프팅 갤러리';
-        img.style.display = 'block';
-    }
-    document.getElementById('lbCaption').textContent = p.caption || '';
-    document.getElementById('lbCounter').textContent = (lbIndex + 1) + ' / ' + galleryPhotos.length;
-}
-document.getElementById('lightbox').addEventListener('click', function(e) {
-    if (e.target === this) closeLightbox();
-});
-document.addEventListener('keydown', function(e) {
-    if (!document.getElementById('lightbox').classList.contains('active')) return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft') navLightbox(-1);
-    if (e.key === 'ArrowRight') navLightbox(1);
-});
 </script>
 </body>
 </html>
