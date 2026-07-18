@@ -570,6 +570,34 @@ function buildPostHtml(post) {
         + '<p>래프팅·식사·숙박 원스톱 패키지 | 네이버 예약 시 특별할인</p>'
         + '<a href="https://map.naver.com/p/entry/place/1722954715?placePath=%2Fticket" target="_blank" rel="noopener">📋 네이버 예약하기</a></div>\n'
         + '</div>\n'
+        + '<div id="relatedPosts" style="max-width:860px;margin:24px auto 0;padding:0 20px;"></div>\n'
+        + '<script>\n'
+        + '(function(){\n'
+        + '  var m=location.pathname.match(/posts\\/(\\d+)\\.html/);\n'
+        + '  if(!m)return;\n'
+        + '  var curId=parseInt(m[1]);\n'
+        + '  fetch("../posts.json?"+Date.now()).then(function(r){return r.json()}).then(function(posts){\n'
+        + '    var cur=posts.find(function(p){return p.id===curId});\n'
+        + '    if(!cur)return;\n'
+        + '    var curTags=cur.tags||[];\n'
+        + '    var scored=posts.filter(function(p){return p.id!==curId}).map(function(p){\n'
+        + '      var s=0;(p.tags||[]).forEach(function(t){if(curTags.indexOf(t)>-1)s+=2;});return{p:p,s:s};\n'
+        + '    }).sort(function(a,b){return b.s-a.s||new Date(b.p.date)-new Date(a.p.date)}).slice(0,3);\n'
+        + '    if(!scored.length)return;\n'
+        + '    var h=\'<div style="background:#fff;border-radius:12px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.08)"><h3 style="font-size:18px;color:#0a1d3f;margin-bottom:16px">📖 관련 글 더보기</h3><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px">\';\n'
+        + '    scored.forEach(function(item){\n'
+        + '      var p=item.p;\n'
+        + '      h+=\'<a href="\'+p.id+\'.html" style="display:block;padding:16px;background:#f0f4f8;border-radius:10px;text-decoration:none;color:inherit;border:2px solid transparent;transition:all 0.2s"\';\n'
+        + '      h+=\' onmouseover="this.style.borderColor=\\\'#0066cc\\\'\" onmouseout="this.style.borderColor=\\\'transparent\\\'">\';\n'
+        + '      h+=\'<div style="font-size:13px;color:#0066cc;margin-bottom:4px">#\'+(p.tags[0]||"")+\'</div>\';\n'
+        + '      h+=\'<div style="font-size:15px;font-weight:700;color:#0a1d3f;line-height:1.4">\'+p.title+\'</div>\';\n'
+        + '      h+=\'</a>\';\n'
+        + '    });\n'
+        + '    h+=\'</div></div>\';\n'
+        + '    document.getElementById("relatedPosts").innerHTML=h;\n'
+        + '  }).catch(function(){});\n'
+        + '})();\n'
+        + '<\/script>\n'
         + '<footer class="footer"><p><strong>21세기동강래프팅</strong> | 강원 영월군 영월읍 동강로 915 1층 | 📞 대표전화 033-373-0272 / 예약문의 010-5483-3812</p>'
         + '<p style="margin-top:6px;">대표: 백미희 | 사업자등록번호: 304-10-03946</p>'
         + '<p style="margin-top:8px;"><a href="../index.html">홈페이지</a> · <a href="../blog.html">블로그</a></p>'
@@ -619,9 +647,24 @@ async function deleteGhFile(filePath, message) {
     });
     return delRes.ok;
 }
+const INDEXNOW_KEY = '3b941e3d304949bf8b0888fb54b2b849';
+async function pingIndexNow(urls) {
+    try {
+        await fetch('https://api.indexnow.org/indexnow', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                host: 'donggang21c.com',
+                key: INDEXNOW_KEY,
+                keyLocation: 'https://donggang21c.com/' + INDEXNOW_KEY + '.txt',
+                urlList: urls
+            })
+        });
+    } catch (e) {}
+}
 async function syncSeoFiles(post, action) {
     try {
-        showStatus('검색엔진용 글 페이지 생성 중...', 'loading');
+        showStatus('검색엔진용 글 페이지 + sitemap 생성 중...', 'loading');
         let ok = true;
         if (action === 'delete') {
             ok = await deleteGhFile('posts/' + post.id + '.html', 'SEO 글 페이지 삭제: ' + post.title);
@@ -629,8 +672,15 @@ async function syncSeoFiles(post, action) {
             ok = await putGhFile('posts/' + post.id + '.html', buildPostHtml(post), 'SEO 글 페이지: ' + post.title);
         }
         const okMap = await putGhFile('sitemap.xml', buildSitemapXml(posts), 'sitemap.xml 갱신');
+        if (action !== 'delete') {
+            pingIndexNow([
+                'https://donggang21c.com/posts/' + post.id + '.html',
+                'https://donggang21c.com/blog.html',
+                'https://donggang21c.com/sitemap.xml'
+            ]);
+        }
         if (ok && okMap) {
-            showStatus('✅ 저장 + 검색엔진 등록 완료! 1~2분 후 반영됩니다.', 'success');
+            showStatus('✅ 저장 + 검색엔진 등록 + 색인 요청 완료! 1~2분 후 반영됩니다.', 'success');
         } else {
             showStatus('⚠️ 글은 저장됐지만 검색엔진용 페이지 생성에 실패했습니다. 다시 발행해보세요.', 'error');
         }
