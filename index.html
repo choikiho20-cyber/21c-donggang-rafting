@@ -389,6 +389,28 @@
         @media (max-width: 768px) { .gallery-preview { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 480px) { .gallery-preview { grid-template-columns: 1fr; } }
 
+        /* ===== ROOM TOUR ===== */
+        .room-section { background: var(--gray-50); padding: 48px 0; }
+        .room-inner { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+        .room-slider-wrap { position: relative; overflow: hidden; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); background: #000; }
+        .room-slider { display: flex; transition: transform 0.4s ease; }
+        .room-slide { min-width: 100%; position: relative; }
+        .room-slide img { width: 100%; height: 420px; object-fit: cover; display: block; }
+        .room-label { position: absolute; bottom: 0; left: 0; right: 0; padding: 14px 20px; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); color: #fff; font-size: 15px; font-weight: 700; }
+        .room-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.2); backdrop-filter: blur(4px); border: none; color: #fff; font-size: 28px; width: 48px; height: 48px; border-radius: 50%; cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: background 0.3s; }
+        .room-nav:hover { background: rgba(255,255,255,0.4); }
+        .room-prev { left: 12px; }
+        .room-next { right: 12px; }
+        .room-counter { text-align: center; margin-top: 12px; font-size: 14px; color: var(--gray-600); font-weight: 600; }
+        .room-features { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 20px; }
+        .room-feat { background: var(--white); padding: 10px 18px; border-radius: 10px; font-size: 14px; font-weight: 600; color: var(--gray-900); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 6px; }
+        .room-feat span { font-size: 18px; }
+        @media (max-width: 768px) {
+            .room-slide img { height: 280px; }
+            .room-nav { width: 40px; height: 40px; font-size: 22px; }
+            .room-feat { padding: 8px 14px; font-size: 13px; }
+        }
+
         /* ===== CTA ===== */
         .cta-big { background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 50%, #45b36b 100%); padding: 48px 20px; text-align: center; position: relative; overflow: hidden; }
         .cta-big h2 { font-family: 'Jua', sans-serif; font-size: 46px; color: white; margin-bottom: 8px; position: relative; text-shadow: 3px 3px 0 rgba(0,0,0,0.2); }
@@ -789,6 +811,72 @@
                     <div class="btn-pair" style="max-width:300px; margin: 0 auto;"><a href="https://map.naver.com/p/entry/place/1722954715?placePath=%2Fticket%3FfromPanelNum%3D1%26additionalHeight%3D76%26timestamp%3D202606261601%26locale%3Dko%26svcName%3Dmap_pcv5&c=15.00,0,0,2,dh" target="_blank" class="btn-online">온라인 예약</a><a href="tel:010-5483-3812" class="btn-call">전화 예약</a></div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- ROOM TOUR -->
+<div class="room-section" id="rooms">
+    <div class="room-inner">
+        <div class="sec-header">
+            <h2>🏡 <span>숙소</span> 둘러보기</h2>
+            <p>래프팅 후 도보 1분! 깨끗하고 편안한 숙소</p>
+            <span class="line"></span>
+        </div>
+        <div class="room-slider-wrap">
+            <button class="room-nav room-prev" onclick="slideRoom(-1)">❮</button>
+            <div class="room-slider" id="roomSlider">
+                <div class="room-slide">
+                    <img src="images/room-exterior-small.webp" alt="21세기동강래프팅 숙소 외관 - 작은방 건물" loading="lazy">
+                    <div class="room-label">작은방 외관</div>
+                </div>
+                <div class="room-slide">
+                    <img src="images/room-small-1.webp" alt="21세기동강래프팅 작은방 - 에어컨 TV 옷장 완비" loading="lazy">
+                    <div class="room-label">작은방 (에어컨 · TV · 옷장)</div>
+                </div>
+                <div class="room-slide">
+                    <img src="images/room-small-2.webp" alt="21세기동강래프팅 작은방 내부 - 냉장고 테이블" loading="lazy">
+                    <div class="room-label">작은방 (냉장고 · 테이블)</div>
+                </div>
+                <div class="room-slide">
+                    <img src="images/room-exterior-big.webp" alt="21세기동강래프팅 숙소 외관 - 큰방 건물" loading="lazy">
+                    <div class="room-label">큰방 외관</div>
+                </div>
+                <div class="room-slide">
+                    <img src="images/room-big-1.webp" alt="21세기동강래프팅 큰방 - 넓은 온돌방 에어컨" loading="lazy">
+                    <div class="room-label">큰방 (넓은 온돌방)</div>
+                </div>
+                <div class="room-slide">
+                    <img src="images/room-big-2.webp" alt="21세기동강래프팅 큰방 화장실 냉장고" loading="lazy">
+                    <div class="room-label">큰방 (개별 화장실 · 냉장고)</div>
+                </div>
+                <div class="room-slide">
+                    <img src="images/room-tworoom-1.webp" alt="21세기동강래프팅 투룸 - 피아노 거실" loading="lazy">
+                    <div class="room-label">투룸 (거실)</div>
+                </div>
+                <div class="room-slide">
+                    <img src="images/room-tworoom-2.webp" alt="21세기동강래프팅 투룸 - 스탠드 에어컨 식당 연결" loading="lazy">
+                    <div class="room-label">투룸 (식당 연결)</div>
+                </div>
+                <div class="room-slide">
+                    <img src="images/room-tworoom-3.webp" alt="21세기동강래프팅 투룸 침구 그릇장 화장실" loading="lazy">
+                    <div class="room-label">투룸 (그릇장 · 화장실)</div>
+                </div>
+                <div class="room-slide">
+                    <img src="images/room-kitchen.webp" alt="21세기동강래프팅 숙소 주방 대형냉장고" loading="lazy">
+                    <div class="room-label">주방 (대형 냉장고)</div>
+                </div>
+            </div>
+            <button class="room-nav room-next" onclick="slideRoom(1)">❯</button>
+        </div>
+        <div class="room-counter" id="roomCounter">1 / 10</div>
+        <div class="room-features">
+            <div class="room-feat"><span>❄️</span>에어컨</div>
+            <div class="room-feat"><span>📺</span>TV</div>
+            <div class="room-feat"><span>🧊</span>냉장고</div>
+            <div class="room-feat"><span>🚿</span>개별 화장실</div>
+            <div class="room-feat"><span>🅿️</span>무료 주차</div>
+            <div class="room-feat"><span>🌐</span>Wi-Fi</div>
         </div>
     </div>
 </div>
@@ -1195,6 +1283,17 @@ const countObs = new IntersectionObserver(entries => { entries.forEach(e => { if
     countObs.unobserve(e.target);
 }});}, { threshold: 0.5 });
 counters.forEach(c => countObs.observe(c));
+
+// === 숙소 슬라이더 ===
+let roomIdx = 0;
+const roomSlider = document.getElementById('roomSlider');
+const roomTotal = document.querySelectorAll('.room-slide').length;
+function slideRoom(dir) {
+    roomIdx = (roomIdx + dir + roomTotal) % roomTotal;
+    roomSlider.style.transform = 'translateX(-' + (roomIdx * 100) + '%)';
+    document.getElementById('roomCounter').textContent = (roomIdx + 1) + ' / ' + roomTotal;
+}
+setInterval(() => slideRoom(1), 4000);
 
 // === 갤러리 프리뷰 (메인페이지용) ===
 (function() {
