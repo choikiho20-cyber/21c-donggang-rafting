@@ -411,6 +411,10 @@
             .room-feat { padding: 8px 14px; font-size: 13px; }
         }
 
+        /* ===== ADMIN TOGGLE ===== */
+        .admin-toggle { position: fixed; bottom: 80px; left: 20px; z-index: 9999; background: #333; color: #fff; border: none; padding: 10px 16px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 700; box-shadow: 0 2px 12px rgba(0,0,0,0.3); }
+        .admin-toggle:hover { background: #1976d2; }
+
         /* ===== CTA ===== */
         .cta-big { background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 50%, #45b36b 100%); padding: 48px 20px; text-align: center; position: relative; overflow: hidden; }
         .cta-big h2 { font-family: 'Jua', sans-serif; font-size: 46px; color: white; margin-bottom: 8px; position: relative; text-shadow: 3px 3px 0 rgba(0,0,0,0.2); }
@@ -1244,6 +1248,9 @@
     <a href="#packages" class="sf-item sf-naver"><span class="sf-icon">📋</span><span>패키지</span></a>
     <button class="sf-item sf-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><span class="sf-icon">⬆️</span><span>TOP</span></button>
 </div>
+
+<!-- ADMIN TOGGLE -->
+<button class="admin-toggle" onclick="openAdmin(event)">⚙️ 관리</button>
 
 <!-- MOBILE BOTTOM -->
 <div class="mobile-bottom">
