@@ -425,6 +425,24 @@
         .btn-cta.kakao { background: #fee500; color: #3c1e1e; }
         .btn-cta.phone { background: white; color: var(--green-dark); }
 
+        /* ===== BLOG GUIDE ===== */
+        .blog-section { background: var(--white); padding: 48px 20px; }
+        .blog-inner { max-width: 1100px; margin: 0 auto; }
+        .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .blog-card-home { background: var(--gray-50); border-radius: 14px; padding: 24px; text-decoration: none; color: inherit; transition: all 0.3s; border: 2px solid transparent; display: flex; flex-direction: column; }
+        .blog-card-home:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,0,0,0.1); border-color: var(--blue); }
+        .blog-card-home .bc-tag { display: inline-block; background: var(--sky); color: var(--blue); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; margin-bottom: 10px; align-self: flex-start; }
+        .blog-card-home h3 { font-size: 17px; color: var(--navy); line-height: 1.5; margin-bottom: 10px; font-weight: 800; }
+        .blog-card-home p { font-size: 13px; color: var(--gray-600); line-height: 1.6; flex: 1; }
+        .blog-card-home .bc-arrow { margin-top: 12px; font-size: 13px; color: var(--blue); font-weight: 700; }
+        .blog-more-wrap { text-align: center; margin-top: 24px; }
+        .blog-more-btn { display: inline-block; padding: 12px 32px; background: var(--navy); color: white; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 15px; transition: all 0.3s; }
+        .blog-more-btn:hover { background: var(--blue); transform: translateY(-2px); }
+        @media (max-width: 768px) {
+            .blog-grid { grid-template-columns: 1fr; gap: 14px; }
+            .blog-card-home h3 { font-size: 16px; }
+        }
+
         /* ===== FAQ ===== */
         .faq-section { max-width: 900px; margin: 0 auto; padding: 48px 20px; }
         .faq-item { background: var(--white); border-radius: 10px; margin-bottom: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.04); overflow: hidden; border-left: 4px solid var(--blue); }
@@ -1065,6 +1083,21 @@
     </div>
 </section>
 
+<!-- BLOG GUIDE -->
+<div class="blog-section" id="guide">
+    <div class="blog-inner">
+        <div class="sec-header">
+            <h2>📖 래프팅 <span>가이드</span></h2>
+            <p>가격, 준비물, 코스 안내부터 여행 꿀팁까지</p>
+            <span class="line"></span>
+        </div>
+        <div class="blog-grid" id="blogGrid"></div>
+        <div class="blog-more-wrap">
+            <a href="blog.html" class="blog-more-btn">가이드 전체보기 →</a>
+        </div>
+    </div>
+</div>
+
 <!-- FAQ -->
 <div class="faq-section" id="faq">
     <div class="sec-header">
@@ -1404,6 +1437,56 @@ function openAdmin(e) {
     document.body.appendChild(panel);
     panel.addEventListener('click', function(ev) { if (ev.target === panel) panel.remove(); });
 }
+
+(function() {
+    var picks = [7, 2, 6, 10, 8, 12];
+    fetch('posts.json?' + Date.now()).then(function(r) { return r.json(); }).then(function(posts) {
+        var grid = document.getElementById('blogGrid');
+        if (!grid) return;
+        var html = '';
+        picks.forEach(function(id) {
+            var p = posts.find(function(x) { return x.id === id; });
+            if (!p) return;
+            var tag = p.tags[0] || '';
+            html += '<a class="blog-card-home" href="posts/' + p.id + '.html">' +
+                '<span class="bc-tag">#' + tag + '</span>' +
+                '<h3>' + p.title + '</h3>' +
+                '<p>' + p.summary.substring(0, 80) + '...</p>' +
+                '<span class="bc-arrow">자세히 보기 →</span></a>';
+        });
+        grid.innerHTML = html;
+    }).catch(function() {});
+})();
+
+document.addEventListener('click', function(e) {
+    var a = e.target.closest('a');
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    if (href.startsWith('tel:')) {
+        var num = href.replace('tel:', '');
+        gtag('event', 'phone_call', {
+            event_category: 'conversion',
+            event_label: num,
+            link_text: a.textContent.trim().substring(0, 50)
+        });
+    } else if (href.indexOf('map.naver.com') > -1 && href.indexOf('ticket') > -1) {
+        gtag('event', 'online_booking', {
+            event_category: 'conversion',
+            event_label: 'naver_reservation',
+            link_text: a.textContent.trim().substring(0, 50)
+        });
+    } else if (href.indexOf('map.naver.com') > -1 && href.indexOf('review') > -1) {
+        gtag('event', 'review_click', {
+            event_category: 'engagement',
+            event_label: 'naver_review'
+        });
+    } else if (href.indexOf('map.kakao.com') > -1) {
+        gtag('event', 'kakaomap_click', {
+            event_category: 'engagement',
+            event_label: 'kakaomap'
+        });
+    }
+});
 </script>
 </body>
 </html>

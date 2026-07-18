@@ -925,6 +925,19 @@ async function handleVideoUpload(e) {
 document.getElementById('lightbox').addEventListener('click', function(e) {
     if (e.target === this) closeLightbox();
 });
+
+document.addEventListener('click', function(e) {
+    var a = e.target.closest('a');
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    if (href.startsWith('tel:')) {
+        gtag('event', 'phone_call', {
+            event_category: 'conversion',
+            event_label: href.replace('tel:', ''),
+            link_text: a.textContent.trim().substring(0, 50)
+        });
+    }
+});
 </script>
 </body>
 </html>
