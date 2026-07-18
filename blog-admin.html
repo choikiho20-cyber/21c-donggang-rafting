@@ -464,7 +464,7 @@ function escAttr(s) {
 }
 function firstImageOf(content) {
     const m = String(content || '').match(/<img[^>]+src="([^"]+)"/);
-    return m ? m[1] : 'https://donggang21c.com/images/hero-rafting.jpeg';
+    return m ? m[1] : 'https://donggang21c.com/images/hero-rafting.webp';
 }
 function stripHtml(content) {
     return String(content || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
