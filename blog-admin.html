@@ -247,6 +247,12 @@ async function loadPosts() {
         posts = await res.json();
         posts.sort((a, b) => new Date(b.date) - new Date(a.date));
         renderPostList();
+        const params = new URLSearchParams(location.search);
+        const editId = params.get('edit');
+        if (editId) {
+            const post = posts.find(p => p.id === parseInt(editId));
+            if (post) showEditor(post);
+        }
     } catch (e) {
         posts = [];
         renderPostList();
@@ -553,6 +559,11 @@ function buildPostHtml(post) {
         + '.blog-cta a{display:inline-block;padding:12px 32px;background:var(--yellow);color:var(--navy);border-radius:8px;font-weight:800;text-decoration:none;font-size:16px;}\n'
         + '.footer{background:var(--navy);color:rgba(255,255,255,0.7);padding:32px 20px;text-align:center;font-size:13px;margin-top:40px;}\n'
         + '.footer a{color:var(--yellow);text-decoration:none;}\n'
+        + '.admin-float{position:fixed;bottom:20px;left:20px;z-index:999;display:flex;gap:8px;}\n'
+        + '.admin-float a{display:flex;align-items:center;gap:6px;padding:10px 18px;border-radius:30px;font-size:13px;font-weight:700;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.2);transition:all 0.2s;}\n'
+        + '.admin-float a:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.3);}\n'
+        + '.btn-admin-edit{background:var(--blue);color:#fff;}\n'
+        + '.btn-admin-del{background:var(--red);color:#fff;}\n'
         + '@media (max-width:768px){.blog-post-header h1{font-size:22px;}.blog-post-content{padding:20px;}.header-phone{font-size:14px;}.logo-main{font-size:20px;}}\n'
         + '</style>\n</head>\n<body>\n'
         + '<div class="top-bar"><div class="top-bar-inner"><a href="../index.html">🏠 홈</a><a href="../blog.html">블로그</a><a href="../index.html#location">오시는길</a></div></div>\n'
@@ -571,6 +582,7 @@ function buildPostHtml(post) {
         + '<a href="https://map.naver.com/p/entry/place/1722954715?placePath=%2Fticket" target="_blank" rel="noopener">📋 네이버 예약하기</a></div>\n'
         + '</div>\n'
         + '<div id="relatedPosts" style="max-width:860px;margin:24px auto 0;padding:0 20px;"></div>\n'
+        + '<div class="admin-float"><a class="btn-admin-edit" href="../blog-admin.html?edit=' + post.id + '">✏️ 수정</a><a class="btn-admin-del" href="../blog-admin.html">🗑️ 관리</a></div>\n'
         + '<script>\n'
         + '(function(){\n'
         + '  var m=location.pathname.match(/posts\\/(\\d+)\\.html/);\n'

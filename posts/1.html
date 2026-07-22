@@ -66,6 +66,11 @@ body{font-family:'Noto Sans KR',sans-serif;color:var(--gray-900);background:#f0f
 .blog-cta a{display:inline-block;padding:12px 32px;background:var(--yellow);color:var(--navy);border-radius:8px;font-weight:800;text-decoration:none;font-size:16px;}
 .footer{background:var(--navy);color:rgba(255,255,255,0.7);padding:32px 20px;text-align:center;font-size:13px;margin-top:40px;}
 .footer a{color:var(--yellow);text-decoration:none;}
+.admin-float{position:fixed;bottom:20px;left:20px;z-index:999;display:flex;gap:8px;}
+.admin-float a{display:flex;align-items:center;gap:6px;padding:10px 18px;border-radius:30px;font-size:13px;font-weight:700;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.2);transition:all 0.2s;}
+.admin-float a:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.3);}
+.btn-admin-edit{background:var(--blue);color:#fff;}
+.btn-admin-del{background:var(--red);color:#fff;}
 @media (max-width:768px){.blog-post-header h1{font-size:22px;}.blog-post-content{padding:20px;}.header-phone{font-size:14px;}.logo-main{font-size:20px;}}
 </style>
 </head>
@@ -85,6 +90,7 @@ body{font-family:'Noto Sans KR',sans-serif;color:var(--gray-900);background:#f0f
 <div class="blog-cta"><h3>동강에서 잊지 못할 추억을 만들어 보세요</h3><p>래프팅·식사·숙박 원스톱 패키지 | 네이버 예약 시 특별할인</p><a href="https://map.naver.com/p/entry/place/1722954715?placePath=%2Fticket" target="_blank" rel="noopener">📋 네이버 예약하기</a></div>
 </div>
 <div id="relatedPosts" style="max-width:860px;margin:24px auto 0;padding:0 20px;"></div>
+<div class="admin-float"><a class="btn-admin-edit" href="../blog-admin.html?edit=1">✏️ 수정</a><a class="btn-admin-del" href="../blog-admin.html">🗑️ 관리</a></div>
 <script src="../js/related-posts.js"></script>
 <footer class="footer"><p><strong>21세기동강래프팅</strong> | 강원 영월군 영월읍 동강로 915 1층 | 📞 대표전화 033-373-0272 / 예약문의 010-5483-3812</p><p style="margin-top:6px;">대표: 백미희 | 사업자등록번호: 304-10-03946</p><p style="margin-top:8px;"><a href="../index.html">홈페이지</a> · <a href="../blog.html">블로그</a></p><p style="margin-top:8px;">© 2026 21세기동강래프팅. All rights reserved.</p></footer>
 </body>
