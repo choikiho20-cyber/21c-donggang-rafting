@@ -194,7 +194,7 @@
             background: var(--navy); color: white;
             border: 2px solid var(--yellow); font-weight: 700; font-size: 14px;
             cursor: pointer; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            transition: all 0.3s; display: none;
+            transition: all 0.3s;
         }
         .admin-toggle:hover { background: #1a3d6c; transform: translateY(-2px); }
         body.admin-mode .admin-toggle { background: var(--red); border-color: white; }
@@ -341,7 +341,7 @@
 
 <!-- HERO BANNER -->
 <div class="gallery-hero">
-    <h1>&#x1F4F8; &#54252;&#53664; & &#50689;&#49345; <span class="yellow">&#44040;&#47084;&#47532;</span></h1>
+    <h1>&#x1F4F8; &#54252;&#53664; &amp; &#50689;&#49345; <span class="yellow">&#44068;&#47084;&#47532;</span></h1>
     <p>&#46041;&#44053; &#47000;&#54532;&#54021;&#51032; &#49373;&#49373;&#54620; &#54788;&#51109; &#49324;&#51652;&#44284; &#50689;&#49345;&#51012; &#47564;&#45208;&#48372;&#49464;&#50836;!</p>
 </div>
 
@@ -350,7 +350,7 @@
     <a href="index.html" class="gallery-back">&larr; &#54856;&#51004;&#47196; &#46028;&#50500;&#44032;&#44592;</a>
     <div class="gallery-loading" id="galleryLoading">
         <div class="spinner"></div>
-        <p>&#44040;&#47084;&#47532;&#47484; &#48520;&#47084;&#50724;&#45716; &#51473;...</p>
+        <p>&#44068;&#47084;&#47532;&#47484; &#48520;&#47084;&#50724;&#45716; &#51473;...</p>
     </div>
     <div class="gallery-grid" id="galleryGrid"></div>
 </section>
@@ -455,13 +455,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('galFileInput').addEventListener('change', handlePhotoUpload);
     document.getElementById('galVideoInput').addEventListener('change', handleVideoUpload);
-
-    /* Show admin toggle after triple-click on hero */
-    document.querySelector('.gallery-hero').addEventListener('click', function(e) {
-        if (e.detail === 3) {
-            document.getElementById('adminToggle').style.display = 'block';
-        }
-    });
 
     /* Keyboard for lightbox */
     document.addEventListener('keydown', function(e) {
