@@ -214,9 +214,9 @@
         .slide3::before { background: linear-gradient(135deg, rgba(10,29,63,0.55), rgba(0,80,160,0.3)); }
 
         .hero-content { position: relative; z-index: 2; text-align: center; max-width: 900px; padding: 0 20px; }
-        .hero-content h1 { font-family: 'Jua', sans-serif; font-size: 76px; color: white; text-shadow: 4px 4px 0 rgba(0,0,0,0.4), 0 0 60px rgba(0,0,0,0.3); line-height: 1.1; margin-bottom: 8px; }
-        .hero-content h1 .yellow { color: var(--yellow); text-shadow: 4px 4px 0 rgba(0,0,0,0.4), 0 0 30px rgba(255,215,0,0.5); }
-        .hero-content h1 .green-text { color: #7fff00; }
+        .hero-content :is(h1,h2) { font-family: 'Jua', sans-serif; font-size: 76px; color: white; text-shadow: 4px 4px 0 rgba(0,0,0,0.4), 0 0 60px rgba(0,0,0,0.3); line-height: 1.1; margin-bottom: 8px; }
+        .hero-content :is(h1,h2) .yellow { color: var(--yellow); text-shadow: 4px 4px 0 rgba(0,0,0,0.4), 0 0 30px rgba(255,215,0,0.5); }
+        .hero-content :is(h1,h2) .green-text { color: #7fff00; }
         .hero-sub-text { font-size: 26px; color: white; font-weight: 800; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); margin-bottom: 20px; }
         .hero-price-banner { display: inline-block; background: var(--red); color: white; padding: 8px 28px; border-radius: 50px; font-size: 20px; font-weight: 800; margin-bottom: 20px; animation: blink 2s infinite; box-shadow: 0 4px 20px rgba(255,0,50,0.5); }
         .hero-tags { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
@@ -531,7 +531,7 @@
             .main-nav-inner { min-width: max-content; }
             .main-nav a { padding: 12px 14px; font-size: 13px; white-space: nowrap; }
             .hero { height: 420px; }
-            .hero-content h1 { font-size: 42px; }
+            .hero-content :is(h1,h2) { font-size: 42px; }
             .hero-sub-text { font-size: 18px; }
             .hero-price-banner { font-size: 16px; padding: 6px 20px; }
             .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 12px; }
@@ -555,7 +555,7 @@
         }
         @media (max-width: 480px) {
             .hero { height: 380px; }
-            .hero-content h1 { font-size: 34px; }
+            .hero-content :is(h1,h2) { font-size: 34px; }
             .pkg-tabs { flex-wrap: wrap; }
             .pkg-tab { min-width: 50%; }
             .gallery-grid { grid-template-columns: minmax(0, 1fr); }
@@ -673,7 +673,7 @@
         <div class="hero-slide slide2">
             <video class="slide-video" autoplay muted loop playsinline><source src="images/replicate-prediction-6w684znwaxrmr0cz0abthq7tbr.mp4" type="video/mp4"></video>
             <div class="hero-content">
-                <h1><span class="yellow">1박 2일</span><br>추천 코스</h1>
+                <h2><span class="yellow">1박 2일</span><br>추천 코스</h2>
                 <p class="hero-sub-text">커플 · 친구 · 가족에게 딱 좋은 패키지</p>
                 <div class="hero-price-banner">🔥 1박2일 평일 75,000원~ / 주말 95,000원~</div>
                 <div class="hero-btns">
@@ -685,7 +685,7 @@
         <div class="hero-slide slide3">
             <video class="slide-video" autoplay muted loop playsinline><source src="images/replicate-prediction-b7fjk38xv9rmr0cz0ad86egma0.mp4" type="video/mp4"></video>
             <div class="hero-content">
-                <h1>몸만 오면<br><span class="green-text">끝!</span></h1>
+                <h2>몸만 오면<br><span class="green-text">끝!</span></h2>
                 <p class="hero-sub-text">신나게 놀고 푹 쉬는 진짜 실속 코스</p>
                 <div class="hero-tags">
                     <span class="hero-tag">🛡️ 안전 최우선</span>
