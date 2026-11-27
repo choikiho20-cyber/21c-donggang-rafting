@@ -432,8 +432,9 @@
         .faq-q .badge { background: var(--blue); color: white; padding: 2px 10px; border-radius: 4px; font-size: 12px; margin-right: 10px; flex-shrink: 0; }
         .faq-arrow { transition: transform 0.3s; font-size: 16px; color: var(--blue); }
         .faq-item.open .faq-arrow { transform: rotate(180deg); }
-        .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
-        .faq-item.open .faq-a { max-height: 300px; }
+        .faq-a { display: grid; grid-template-rows: minmax(0, 0fr); overflow: hidden; transition: grid-template-rows 0.3s; }   /* 뚜껑(max-height) 없음 — 답이 길어도 안 잘린다 */
+        .faq-a > * { min-height: 0; }
+        .faq-item.open .faq-a { grid-template-rows: minmax(0, 1fr); }
         .faq-a p { padding: 0 20px 16px; color: var(--gray-600); font-size: 14px; line-height: 1.8; }
 
         /* ===== CTA ===== */

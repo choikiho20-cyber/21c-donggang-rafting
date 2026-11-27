@@ -202,7 +202,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--brand);background:#ff
   <!-- ── 자주 묻는 질문 ── -->
   <section class="card" data-pane="faq" hidden>
     <h2>자주 묻는 질문</h2>
-    <p class="hint">질문은 손님 말투 그대로, 답은 첫 문장에 바로 결론을 쓰세요. 구글·AI 검색이 이 답을 그대로 가져갑니다.</p>
+    <p class="hint">질문은 손님 말투 그대로, 답은 첫 문장에 바로 결론을 쓰세요. 화면에 보이는 답과 <b>검색에 나가는 답이 같은 한 벌</b>입니다 — 여기서 고치면 구글·네이버·AI 답변까지 같이 바뀝니다.</p>
     <div id="faqList"></div>
     <div class="row"><button class="btn" id="faqAdd">+ 질문 추가</button><button class="btn solid" data-save="faq">저장</button></div>
     <p class="note" id="note-faq"></p>
@@ -242,7 +242,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--brand);background:#ff
       <ul>
         <li><b>연락처</b>: 한 곳에서 바꾸면 홈페이지 전체와 블로그 글 전부가 같이 바뀝니다. 글이 많아 1~2분 걸리니 끝날 때까지 기다려 주세요. <b>네이버 플레이스·카카오맵 번호도 똑같이</b> 맞춰야 검색이 헷갈리지 않습니다.</li>
         <li><b>사진첩</b>: [+ 사진]으로 폰 사진을 올리고, 유튜브·인스타는 주소를 붙여 넣으면 됩니다. ↑↓로 순서를 바꾸고 [삭제]로 지웁니다.</li>
-        <li><b>자주 묻는 질문</b>: ↑↓로 순서를 바꾸고 [삭제]로 지웁니다. 마지막에 [저장]을 꼭 누르세요.</li>
+        <li><b>자주 묻는 질문</b>: ↑↓로 순서를 바꾸고 [삭제]로 지웁니다. 마지막에 [저장]을 꼭 누르세요. 여기 적은 답이 <b>구글·네이버 검색 결과에 그대로 나갑니다</b> — 가격·나이 제한처럼 현장에서 다투기 쉬운 조건은 빠뜨리지 말고 적어 주세요. 답은 길어도 괜찮습니다(잘리지 않습니다).</li>
       </ul>
       <h3>6. 검색에 잘 걸리는 요령</h3>
       <ul>
@@ -285,6 +285,8 @@ input:focus,textarea:focus{outline:none;border-color:var(--brand);background:#ff
 /* 글 페이지 고치기 (글해줌 발행기가 이 글을 견본으로 복제하므로 구조는 그대로 두고 값만 바꾼다) */
 const RE_BODY=/(<div class="blog-post-content">)([\s\S]*?)(<\/div>\s*<\/article>)/;
 const escA=t=>String(t==null?'':t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+/* 원본이 CRLF 면 결과도 CRLF 로 — 줄바꿈이 섞이면 나중 앵커 치환이 조용히 비껴간다 */
+const keepEol=(src,out)=>/\r\n/.test(src)?out.replace(/\r?\n/g,'\r\n'):out.replace(/\r\n/g,'\n');
 const unesc=t=>String(t).replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&rarr;/g,'→').replace(/&times;/g,'×').replace(/&amp;/g,'&');
 const plain=h=>unesc(String(h).replace(/<[^>]+>/g,'')).replace(/\s+/g,' ').trim();
 function getBody(html){const m=html.match(RE_BODY);return m?m[2].trim():null}
@@ -388,9 +390,15 @@ function parseFaq(html){
     .map(m=>({q:plain(m[1]),a:plain(m[2])}));
 }
 function renderFaq(html,items){
-  return setMk(html,'faq',items.map(x=>
+  html=setMk(html,'faq',items.map(x=>
     '\n    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><div><span class="badge">Q</span>'+escA(x.q)
     +'</div><span class="faq-arrow">▼</span></div><div class="faq-a"><p>'+escA(x.a)+'</p></div></div>').join('')+'\n    ');
+  /* 검색용 FAQPage 도 같은 한 벌에서 — 화면 답과 검색 답이 갈라지면 안 된다.
+     '<' 를 \\u003c 로 바꿔 답변 안의 \/script> 가 블록을 끊는 것을 코드로 막는다 */
+  const ld=JSON.stringify({'@context':'https://schema.org','@type':'FAQPage',
+    mainEntity:items.map(x=>({'@type':'Question',name:x.q,
+      acceptedAnswer:{'@type':'Answer',text:x.a}}))},null,4).replace(/</g,'\\u003c');
+  return setMk(html,'faqld','\n    <script type="application/ld+json">\n    '+ld+'\n    <\/script>\n    ');
 }
 
 /* 연락처 — 한 번호가 화면용·국제형·숫자만 세 모양으로 박혀 있다. 셋 다 바꿔야 검색이 안 헷갈린다 */
@@ -451,7 +459,7 @@ const readText=async path=>b64dec((await gh(path+'?ref='+BRANCH)).content);
 /* 파일 하나를 읽어 fn으로 고쳐 저장. 그사이 다른 저장(글해줌 등)이 끼면 다시 읽어서 고친다 */
 async function editFile(path,fn,message){
   for(let tries=0;;tries++){
-    const f=await gh(path+'?ref='+BRANCH), t=b64dec(f.content), n=fn(t);
+    const f=await gh(path+'?ref='+BRANCH), t=b64dec(f.content), n=keepEol(t,fn(t));
     if(n===t) return false;
     try{await put(path,b64text(n),f.sha,message);return true}
     catch(e){if(tries<2&&(e.status===409||e.status===422))continue;throw e}
@@ -720,7 +728,7 @@ function readHeroForm(){return [...$('heroList').querySelectorAll('.item')].map(
 function drawFaq(){
   $('faqList').innerHTML=faqs.map((x,i)=>`<div class="item" data-i="${i}">
     <label>질문 ${i+1}</label><input type="text" data-q value="${escA(x.q)}">
-    <label>답</label><textarea data-a rows="2">${escA(x.a)}</textarea>
+    <label>답</label><textarea data-a rows="3">${escA(x.a)}</textarea>
     <div class="bar"><button class="btn ghost sm" data-mv="-1" aria-label="위로">↑</button><button class="btn ghost sm" data-mv="1" aria-label="아래로">↓</button><button class="btn ghost sm" data-del>삭제</button></div></div>`).join('');
 }
 function readFaqForm(){return [...$('faqList').querySelectorAll('.item')].map(el=>({q:el.querySelector('[data-q]').value.trim(),a:el.querySelector('[data-a]').value.replace(/\s+/g,' ').trim()}))}
