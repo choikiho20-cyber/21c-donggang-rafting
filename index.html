@@ -1459,8 +1459,6 @@ function openBooking(e) {
 
 function openAdmin(e) {
     e.preventDefault();
-    const pwd = prompt('관리자 비밀번호를 입력하세요:');
-    if (pwd !== '2021') return;
     const existing = document.getElementById('adminPanel');
     if (existing) { existing.remove(); return; }
     const panel = document.createElement('div');
@@ -1470,8 +1468,7 @@ function openAdmin(e) {
         <div style="background:#fff;border-radius:16px;padding:32px;max-width:400px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
             <h2 style="margin:0 0 20px;font-size:22px;">⚙️ 관리자 설정</h2>
             <div style="display:flex;flex-direction:column;gap:12px;">
-                <button onclick="document.getElementById('adminPanel').remove();window.open('gallery.html','_blank');" style="padding:14px;border:none;border-radius:10px;background:#1976d2;color:#fff;font-size:15px;font-weight:700;cursor:pointer;">🖼️ 갤러리 사진 관리</button>
-                <button onclick="document.getElementById('adminPanel').remove();window.open('blog-admin.html','_blank');" style="padding:14px;border:none;border-radius:10px;background:#e91e63;color:#fff;font-size:15px;font-weight:700;cursor:pointer;">📝 블로그 관리</button>
+                <button onclick="document.getElementById('adminPanel').remove();window.open('admin.html','_blank');" style="padding:14px;border:none;border-radius:10px;background:#1976d2;color:#fff;font-size:15px;font-weight:700;cursor:pointer;">🛠️ 홈페이지 관리 (비밀번호)</button>
                 <button onclick="document.getElementById('adminPanel').remove();window.open('blog.html','_blank');" style="padding:14px;border:none;border-radius:10px;background:#ff5722;color:#fff;font-size:15px;font-weight:700;cursor:pointer;">📰 블로그 글 보기</button>
                 <button onclick="document.getElementById('adminPanel').remove();window.open('https://analytics.google.com','_blank');" style="padding:14px;border:none;border-radius:10px;background:#f57c00;color:#fff;font-size:15px;font-weight:700;cursor:pointer;">📊 방문자 통계 (GA)</button>
                 <button onclick="document.getElementById('adminPanel').remove();window.open('https://search.google.com/search-console','_blank');" style="padding:14px;border:none;border-radius:10px;background:#4caf50;color:#fff;font-size:15px;font-weight:700;cursor:pointer;">🔍 구글 검색 관리</button>

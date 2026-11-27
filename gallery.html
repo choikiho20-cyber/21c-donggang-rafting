@@ -359,7 +359,7 @@
 </section>
 
 <!-- ADMIN TOGGLE -->
-<button class="admin-toggle" id="adminToggle" onclick="toggleAdmin()">&#x1F512; &#44288;&#47532;&#47784;&#46300;</button>
+<button class="admin-toggle" id="adminToggle" onclick="toggleAdmin()">&#x1F512; &#44288;&#47532;</button>
 
 <!-- LIGHTBOX -->
 <div class="lightbox-overlay" id="lightbox">
@@ -615,22 +615,8 @@ function updateLightbox() {
 }
 
 /* ===== ADMIN MODE ===== */
-function toggleAdmin() {
-    if (!isAdminMode) {
-        var pw = prompt('관리자 비밀번호를 입력하세요:');
-        if (pw !== '2021') {
-            alert('비밀번호가 틀렸습니다.');
-            return;
-        }
-        isAdminMode = true;
-        document.body.classList.add('admin-mode');
-        document.getElementById('adminToggle').innerHTML = '🔒 관리모드 종료';
-    } else {
-        isAdminMode = false;
-        document.body.classList.remove('admin-mode');
-        document.getElementById('adminToggle').innerHTML = '🔒 관리모드';
-    }
-}
+/* 옛 관리모드(비밀번호 2021 + 토큰 직접 입력)는 닫았다. 사진첩도 /admin.html 한 곳에서 고친다 */
+function toggleAdmin() { location.href = '/admin.html'; }
 
 /* ===== DELETE ===== */
 function deletePhoto(index) {
