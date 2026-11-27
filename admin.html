@@ -262,6 +262,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--brand);background:#ff
         <li>비밀번호는 카톡 단체방에 올리지 마세요.</li>
         <li>직원이 그만두면 [블로그] 화면의 [비밀번호 정하기·바꾸기]로 바꾸세요. 그러면 모든 사람이 새 비밀번호를 넣어야 합니다.</li>
         <li>바꿀 때는 이 홈페이지 전용 GitHub 토큰이 한 번 필요합니다.</li>
+        <li><b>직원이 그만둔 경우에는 토큰도 새로 만들고 옛 토큰은 GitHub에서 폐기하세요.</b> 비밀번호만 바꾸면, 그 직원 휴대폰에 이미 내려받아진 열쇠가 남아 있어 계속 고칠 수 있습니다.</li>
       </ul>
       <p class="hint" style="margin-top:12px">홈페이지 제작 · 소통마케팅센터 010-2468-5662</p>
     </details>
@@ -424,7 +425,7 @@ function swapPhones(t,o,n){
 /* 불러온 본문에서 스크립트·on* 속성 제거 (열쇠가 이 화면에 있으므로) */
 function clean(html){
   const t=document.createElement('template'); t.innerHTML=html;
-  t.content.querySelectorAll('script,style,iframe,object,embed').forEach(n=>n.remove());
+  t.content.querySelectorAll('script,style,iframe,object,embed,link,meta,base,form,input,button').forEach(n=>n.remove());
   t.content.querySelectorAll('*').forEach(n=>[...n.attributes].forEach(a=>{
     if(/^on/i.test(a.name)||/^\s*javascript:/i.test(a.value)||a.name==='data-sel'||a.name==='contenteditable') n.removeAttribute(a.name)}));
   return t.innerHTML;
@@ -823,7 +824,7 @@ $('pw').addEventListener('keydown',e=>{if(e.key==='Enter')pwLogin()});
 $('pwSet').onclick=async()=>{
   const k=(prompt('사장님·직원이 쓸 GitHub 토큰을 붙여 넣어 주세요.\n(이 홈페이지 저장소 하나만 · Contents 읽기/쓰기 · 기간은 길게(1년~만료 없음) 새로 만든 것)')||'').trim();
   if(!k) return;
-  if(k===token()&&!confirm('지금 이 기기에 넣은 열쇠와 같습니다. 이 열쇠가 여러 홈페이지를 여는 열쇠라면 [취소]하고 이 홈페이지 전용 열쇠를 새로 만들어 주세요.\n이 홈페이지 전용이 맞으면 [확인].'))return;
+  if(k===token()&&!confirm('지금 이 기기에 넣은 열쇠와 같습니다.\n\n직원이 그만둬서 바꾸시는 거라면 [취소]하세요 — 열쇠가 그대로면 그 직원 휴대폰에 이미 내려받아진 열쇠로 계속 고칠 수 있습니다. 열쇠를 새로 만들고 옛 열쇠는 GitHub에서 폐기해야 합니다.\n\n그런 경우가 아니면 [확인].'))return;
   try{const r=await fetch(API+'posts.json?ref='+BRANCH,{headers:{Authorization:'Bearer '+k,Accept:'application/vnd.github+json'}});if(!r.ok)throw 0}
   catch(e){return alert('이 열쇠로는 이 홈페이지에 연결되지 않습니다. 저장소 선택과 권한(Contents 읽기/쓰기)을 확인해 주세요.')}
   const p1=prompt('새 비밀번호 (10자 이상, 글자와 숫자를 섞어 주세요)\n상호·전화번호·생일은 넣지 마세요. 길수록 안전합니다 (예: 서로 상관없는 단어 셋 + 숫자)'); if(!p1) return;
@@ -834,7 +835,7 @@ $('pwSet').onclick=async()=>{
     let sha=null; try{sha=(await gh('admin-key.json?ref='+BRANCH)).sha}catch(e){}
     await put('admin-key.json',b64text(JSON.stringify(box)),sha,'관리 화면: 비밀번호 '+(sha?'변경':'설정'));
     keyBox=box;
-    alert('비밀번호를 정했습니다. 1~2분 뒤부터 이 비밀번호로 들어갈 수 있습니다.\n\n사장님·직원분께는 주소와 비밀번호만 알려 주세요:\n'+location.origin+'/admin.html\n\n직원이 그만두면 비밀번호를 바꾸세요.');
+    alert('비밀번호를 정했습니다. 1~2분 뒤부터 이 비밀번호로 들어갈 수 있습니다.\n\n사장님·직원분께는 주소와 비밀번호만 알려 주세요:\n'+location.origin+'/admin.html\n\n※ 직원이 그만둬서 바꾸신 거라면 옛 열쇠(토큰)를 GitHub 설정에서 꼭 폐기해 주세요. 비밀번호만 바꾸고 열쇠를 그대로 두면 그 직원 휴대폰에 남은 열쇠로 계속 고칠 수 있습니다.');
   }catch(e){alert('저장 실패: '+e.message)}
 };
 /* 이 기기에서 처음이면 사용법을 펼쳐 둔다 */
